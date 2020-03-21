@@ -1,13 +1,9 @@
 {
-  "folders": [
-    {
+  "folders": [{
       "path": "."
     },
     {
-      "path": "E:\\YandexDisk\\JS\\reactLoft\\reactStart\\loft-taxi"
-    },
-    {
-      "path": "E:\\YandexDisk\\JS\\reactLoft\\reactStart\\infoTest"
+      "path": "E:\\YandexDisk\\JS\\reactInfo\\proceset"
     }
   ],
   "settings": {
@@ -15,12 +11,10 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "todohighlight.isEnable": true,
     "todohighlight.isCaseSensitive": true,
-    "todohighlight.keywords": [
-      {
-        "text": "todo:",
-        "color": "red"
-      }
-    ]
+    "todohighlight.keywords": [{
+      "text": "todo:",
+      "color": "red"
+    }]
   },
   "extensions": {
     "recommendations": [

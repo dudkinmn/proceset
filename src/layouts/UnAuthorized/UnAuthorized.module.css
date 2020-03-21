@@ -1,0 +1,10 @@
+.content {
+    height: 100%;
+}
+
+.background {
+    background: linear-gradient(213.53deg, #6879BB 7.06%, #9300BB 95.23%);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}

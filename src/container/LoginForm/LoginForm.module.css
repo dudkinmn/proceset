@@ -1,11 +1,4 @@
-.back {
-    background: linear-gradient(213.53deg, #6879BB 7.06%, #9300BB 95.23%);
-    height: 100%;
-    width: 100%;
-    position: fixed;
-}
-
-.content {
+.formLayout {
     background: white;
     position: relative;
     top: 112px;
@@ -15,4 +8,16 @@
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     box-sizing: border-box;
+}
+
+.error {
+    background: #ffe9db;
+    padding: 36px 48px 36px 120px;
+}
+
+.formContent {
+    padding-top: 32px;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 24px;
 }

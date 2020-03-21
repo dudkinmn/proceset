@@ -1,0 +1,7 @@
+.logo {
+    margin-top: 32px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}

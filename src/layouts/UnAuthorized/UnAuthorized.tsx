@@ -1,9 +1,12 @@
 import React from 'react';
 import { Route, Redirect, Link } from 'react-router-dom';
 import { ReactElement } from "react";
-import LoginForm from '../../components/LoginForm/LoginForm';
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
-import backStyle from './UnAuthorized.style'
+import LoginForm from '../../container/LoginForm/LoginForm';
+import RegisterForm from '../../container/RegisterForm/RegisterForm';
+
+import styles from './UnAuthorized.module.css'
+
+import Logo from '../../components/Logo/Logo';
 
 
 export interface IUnAuthorizedProps {
@@ -18,8 +21,11 @@ let UnAuthorized = ({ isRegister, logIn}: UnAuthorizedProps):ReactElement<UnAuth
     
     return (
         <>
-            <div className={backStyle}/>
-            {isRegister ? <RegisterForm /> : <LoginForm logIn={logIn} />}
+            <div className={styles.background}/>
+            <div className={styles.content}>
+                <Logo/>
+                {isRegister ? <RegisterForm /> : <LoginForm logIn={logIn} />}
+            </div>
         </>
     )
 }
