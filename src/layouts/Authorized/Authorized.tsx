@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { ReactElement } from "react";
+import Header from '../../components/Header/Header'
+import Profile from '../../container/ProfileForm/ProfileForm'
 
 type NeedPage = 'main' | 'profile';
 
@@ -19,9 +21,9 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
     let renderSwitch = () => {
         switch(needPage) {
             case 'main':
-                return <div>Главная</div>;
+                return <Profile />;
             case 'profile':
-                return <div>Профиль</div>;
+                return <Profile />;
             default:
                 return <Redirect to='/'/>;
 
@@ -30,8 +32,8 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
     return (
         <>
-            <div>Хедер</div>
-            {renderSwitch() }
+            <Header/>
+            {renderSwitch()}
         </>
 
     )

@@ -20,13 +20,13 @@ type UnAuthorizedProps = IUnAuthorizedProps
 let UnAuthorized = ({ isRegister, logIn}: UnAuthorizedProps):ReactElement<UnAuthorizedProps> => {
     
     return (
-        <>
+        <div className={styles.body}>
             <div className={styles.background}/>
             <div className={styles.content}>
                 <Logo/>
                 {isRegister ? <RegisterForm /> : <LoginForm logIn={logIn} />}
             </div>
-        </>
+        </div>
     )
 }
 

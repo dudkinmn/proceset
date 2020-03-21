@@ -12,7 +12,7 @@ type MyLinkProps = IMyLinkProps;
 
 let MyLink = ({to, linkText}: MyLinkProps): ReactElement<MyLinkProps> => {
   return (
-      <Link to={to}><a href='#'>{linkText}</a></Link>
+    <Link className={styles.link} to={to}><a className={styles.link} href='#'>{linkText}</a></Link>
   );
 };
 

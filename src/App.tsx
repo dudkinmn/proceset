@@ -1,8 +1,6 @@
 import React, { ReactElement, useState } from "react";
-
 import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 import "./index.css";
-import wrapperStyle from "./index.styles";
 import Header from "./components/Header/Header";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Authorized from "./layouts/Authorized/Authorized";
@@ -50,29 +48,22 @@ function App({}: IAppProps): React.ReactElement<any> {
           <Route exact path="/" component={pages.login} />
           <Route path="/register" component={pages.register} />
           <Route path="/login" component={pages.login} />
+          
+          <Route path="/main" component={pages.main} />
+          <Route path="/profile" component={pages.profile} />
 
-          {/*
-                    { 
-                        isAuthorized ? <Route path="/main" component={pages.main} /> : <Redirect to="/login"/>
-                    }
-
-                    { 
-                        isAuthorized ? <Route path="/profile" component={pages.profile} /> : <Redirect to="/login"/>
-                    }
-                    */}
-
-          <PrivateRoute
+          {/*<PrivateRoute
             component={pages.main}
             targetPath="/main"
             isAuthorized={isAuthorized}
             loginPath="/login"
           />
 
-          <PrivateRoute
-            component={pages.profile}
-            targetPath="/profile"
-            isAuthorized={isAuthorized}
-            loginPath="/login"
+            <PrivateRoute
+              component={pages.profile}
+              targetPath="/profile"
+              isAuthorized={isAuthorized}
+          loginPath="/login"*/}
           />
         </Switch>
       </LoginContext.Provider>

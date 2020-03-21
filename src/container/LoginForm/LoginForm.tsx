@@ -6,6 +6,7 @@ import styles from "./LoginForm.module.css";
 import TextField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink'
+import ErrorLogin from '../../components/ErrorLogin/ErrorLogin'
 
 export interface ILoginFormProps {
   logIn: any;
@@ -17,7 +18,7 @@ let LoginForm = ({ logIn }: LoginFormProps): ReactElement<LoginFormProps> => {
 
   
   return (
-    <>
+    
       <div className={styles.formLayout}>
         <div className={styles.formContent}>
           <TextField type="text" placeholder="Электронная почта"/>
@@ -26,12 +27,10 @@ let LoginForm = ({ logIn }: LoginFormProps): ReactElement<LoginFormProps> => {
           <MyLink to='/register' linkText='Зарегистрироваться' />
         </div>
 
-        <div className={styles.error}>
-          <img className="icon" src='/img/Warning.png' alt='warning'></img>
-            Сообщение об ошибке!
-        </div>
+        <ErrorLogin/>
+
        </div>
-    </>
+    
   );
 };
 
