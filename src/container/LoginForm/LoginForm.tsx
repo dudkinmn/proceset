@@ -23,7 +23,7 @@ let LoginForm = ({ logIn }: LoginFormProps): ReactElement<LoginFormProps> => {
         <div className={styles.formContent}>
           <TextField type="text" placeholder="Электронная почта"/>
           <TextField type="password" placeholder="Пароль"/>
-          <Button type='login' buttonText='Войти в систему' />
+          <Button isLogin={true} type='login' buttonText='Войти в систему' />
           <MyLink to='/register' linkText='Зарегистрироваться' />
         </div>
 

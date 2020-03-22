@@ -3,15 +3,25 @@ import { ReactElement } from "react";
 import styles from "./Button.module.css";
 
 export interface IButtonProps {
-    buttonText: string
-    type: string;
+  buttonText: string
+  type: string;
+  isLogin: boolean
 }
 
 type ButtonProps = IButtonProps;
 
-let Button = ({type, buttonText}: ButtonProps): ReactElement<ButtonProps> => {
+let Button = ({type, buttonText, isLogin}: ButtonProps): ReactElement<ButtonProps> => {
   return (
-      <button className={styles.button} >{buttonText}</button>
+    <>
+      {
+        isLogin ?
+          <button className={styles.button + ' ' + styles.buttonLogin}>{buttonText }</button >
+      :
+        <button className={styles.button + ' ' + styles.buttonSave}>{buttonText }</button >
+
+    }
+      </>
+    
   );
 };
 

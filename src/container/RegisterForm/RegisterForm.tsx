@@ -27,7 +27,7 @@ let RegisterForm = ({}: RegisterFormProps): ReactElement<RegisterFormProps> => {
               <TextField type="email" placeholder="Электронная почта"/>
               <TextField type="password" placeholder="Введите пароль"/>
               <TextField type="password" placeholder="Повторите пароль"/>
-              <Button type='login' buttonText='Применить и войти' />
+              <Button isLogin={true} type='login' buttonText='Применить и войти' />
               <p>Уже зарегистрированы?
                       <MyLink to='/login' linkText='Вход'/>
               </p>

@@ -17,22 +17,17 @@ let ProfileForm = ({ }: ProfileFormProps): ReactElement<ProfileFormProps> => {
 
   
   return (
-    <>
+    <div >
       <div id='background'></div>
 
-      <div className="user-header">
-          <h1 className='user-name'>Борис Годунов. Редактирование </h1>
-          <button className='save-button'>Сохранить </button>
+      <div className={styles.userHeader}>
+        <h1 className={styles.userName}>Борис Годунов. Редактирование </h1>
+        <Button isLogin={false} type='login' buttonText='Сохранить' />
       </div>
       
-      {/*<div className="user-data">
-          <div className="input-blok">
-              <label for="uname">Имя</label>
-              <input type="text" id="uname" name="name"
-                  placeholder="Борис"
-                  size="40"/>
-          </div>
-          <div className="input-blok">
+      <div className={styles.userData}>
+        <TextField type='text' placeholder='Борис' withLabel={true} textLabel='Имя' />
+        {/*<div className="input-blok">
               <label for="usurname">Фамилия</label>
               <input type="text" id="usurname" name="surname"
                   placeholder="Годунов"
@@ -55,9 +50,9 @@ let ProfileForm = ({ }: ProfileFormProps): ReactElement<ProfileFormProps> => {
               <input type="password" id="ureppass" name="reppass"
                   placeholder="********"
                   size="40"/>
-          </div>
-  </div>*/}
-    </>
+          </div>*/}
+        </div>
+    </div>
     
   );
 };

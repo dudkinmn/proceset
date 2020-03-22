@@ -11,6 +11,10 @@
     outline: none;         
 }
 
+.sizeInput {
+    width: 40;
+}
+
 .input::placeholder {
     color: #CCCCCC;
 }
@@ -18,3 +22,14 @@
 .input:hover {
     border: 1px solid #415FD5;
 }
+
+label {
+    padding-top: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 32px;
+    align-items: center;
+}
+
+
