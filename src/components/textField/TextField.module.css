@@ -1,35 +1,64 @@
-.input {
-    width: 100%;
+.inputBlock {
+    display: block;
+    margin-bottom: 16px;
+}
+
+input {
     background: #FFFFFF;
     border: 1px solid #D6DCE9;
     box-sizing: border-box;
     border-radius: 4px;
-    padding: 5px 35px 5px 11px;
-    line-height: 24px;
-    margin-bottom: 12px;
     color: #6879BB;  
-    outline: none;         
+    line-height: 24px;
 }
 
-.sizeInput {
-    width: 40;
-}
-
-.input::placeholder {
+input::placeholder {
     color: #CCCCCC;
 }
 
-.input:hover {
+input:hover {
     border: 1px solid #415FD5;
 }
 
 label {
-    padding-top: 0;
+
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 32px;
     align-items: center;
+    
+    color: #999999;
 }
+
+
+
+.inputWithoutLabel {
+
+
+    width: 100%;
+    padding: 5px 35px 5px 11px;
+    margin-bottom: 12px;
+    outline: none;         
+}
+
+.inputWithLabel {
+      
+    position: absolute;
+    left: 284px;
+    width: 435px;
+    height: 36px;
+    padding: 5px 0px 7px 12px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    /*display: flex;*/
+    align-items: center;
+
+}
+
+
+
 
 

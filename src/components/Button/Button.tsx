@@ -15,9 +15,9 @@ let Button = ({type, buttonText, isLogin}: ButtonProps): ReactElement<ButtonProp
     <>
       {
         isLogin ?
-          <button className={styles.button + ' ' + styles.buttonLogin}>{buttonText }</button >
-      :
-        <button className={styles.button + ' ' + styles.buttonSave}>{buttonText }</button >
+          <button className={styles.buttonLogin}>{buttonText }</button >
+        :
+         <button className={styles.buttonSave}>{buttonText }</button >
 
     }
       </>

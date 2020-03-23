@@ -1,5 +1,5 @@
 
-.button {
+button {
     background: #FFCE0C;
     border-radius: 4px;
     line-height: 24px;
@@ -16,27 +16,34 @@
 
 .buttonLogin {
     width: 100%;
+
 }
 
 .buttonSave {
     position: absolute;
-    top: 6px;
+    top: -5px;
     right: 0;
-    margin-right: 44px;
+    margin-right: 46px;
+
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
-.button:hover {
+
+button:hover {
     background: #FFD73B;
 }
 
-.button:active {
+button:active {
     background: #FFC40C;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
 }
 
 
-.button:focus {
+button:focus {
     background: #FFCE0C;
     border: 1px solid #FFFBEA;
     box-sizing: border-box;

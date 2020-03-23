@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Header from '../../components/Header/Header'
 import Profile from '../../container/ProfileForm/ProfileForm'
+import Menu from '../../components/Menu/Menu'
 
 type NeedPage = 'main' | 'profile';
 
@@ -16,7 +17,8 @@ type AuthorizedProps = IAuthorizedProps
 
 let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> => {
     
-    console.log("esrgrg");
+    let [menuVisible, setMenuVisible] = useState(false);
+    console.log("setMenuVisible=" + menuVisible);
 
     let renderSwitch = () => {
         switch(needPage) {
@@ -32,7 +34,8 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
     return (
         <>
-            <Header/>
+            { menuVisible ? <Menu setMenuVisible={setMenuVisible} /> : null}
+            <Header setMenuVisible={setMenuVisible}/>
             {renderSwitch()}
         </>
 

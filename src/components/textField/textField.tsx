@@ -19,9 +19,14 @@ type TextFieldProps = ITextFieldProps;
 
 let TextField = ({ type, placeholder, withInputSize,withLabel, textLabel, size }: TextFieldProps): ReactElement<TextFieldProps> => {
   return (
-    <div style={styles}>
-      { withLabel ?<label>{textLabel}</label> : null}
-      <input className={styles.input} type={type} placeholder={placeholder} />
+    <div className={styles.inputBlock} >
+      {withLabel ? <label>{textLabel}</label> : null}
+      {withLabel ?
+        <input className={styles.inputWithLabel} type={type} placeholder={placeholder} />
+        :
+        <input className={styles.inputWithoutLabel} type={type} placeholder={placeholder} />
+      }
+      
     </div>
   );
 };

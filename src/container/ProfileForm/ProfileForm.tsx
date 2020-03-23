@@ -18,7 +18,7 @@ let ProfileForm = ({ }: ProfileFormProps): ReactElement<ProfileFormProps> => {
   
   return (
     <div >
-      <div id='background'></div>
+      <div className={styles.background}></div>
 
       <div className={styles.userHeader}>
         <h1 className={styles.userName}>Борис Годунов. Редактирование </h1>
@@ -27,31 +27,11 @@ let ProfileForm = ({ }: ProfileFormProps): ReactElement<ProfileFormProps> => {
       
       <div className={styles.userData}>
         <TextField type='text' placeholder='Борис' withLabel={true} textLabel='Имя' />
-        {/*<div className="input-blok">
-              <label for="usurname">Фамилия</label>
-              <input type="text" id="usurname" name="surname"
-                  placeholder="Годунов"
-                  size="40"/>
-          </div>
-          <div className="input-blok">
-              <label for="uemail">Электронная почта</label>
-              <input type="text" id="uemail" name="email"
-                  placeholder="qwerty@yandex.ru.ru"
-                  size="40"/>
-          </div>
-          <div className="input-blok">
-              <label for="unewpass">Новый пароль</label>
-              <input type="password" id="unewpass" name="newpass"
-                  placeholder="********"
-                  size="40"/>
-          </div>
-          <div className="input-blok">
-              <label for="ureppass">Повторите пароль</label>
-              <input type="password" id="ureppass" name="reppass"
-                  placeholder="********"
-                  size="40"/>
-          </div>*/}
-        </div>
+        <TextField type='text' placeholder='Годунов' withLabel={true} textLabel='Фамилия' />
+        <TextField type='email' placeholder='qwerty@yandex.ru.' withLabel={true} textLabel='Электронная почта' />
+        <TextField type='password' placeholder='********' withLabel={true} textLabel='Новый пароль' />
+        <TextField type='password' placeholder='********' withLabel={true} textLabel='Повторите пароль' />
+      </div>
     </div>
     
   );
