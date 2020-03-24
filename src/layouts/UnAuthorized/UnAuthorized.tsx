@@ -24,7 +24,7 @@ let UnAuthorized = ({
       <div className={styles.background} />
       <div className={styles.content}>
         <Logo/>
-        {isRegister ? <RegisterForm /> : <LoginForm logIn={logIn} />}
+        {isRegister ? <RegisterForm /> : <LoginForm />}
       </div>
     </div>
   );

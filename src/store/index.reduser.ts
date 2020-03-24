@@ -1,13 +1,23 @@
 export type TAction = {
   type: string;
-  payload?: any;
-};
+  payload?: any
+}
 
-export const getReduser = (state: any, action: TAction): any => {
-  switch (action.type) {
-    case "swefwef":
-      break;
-    default:
-      break;
+const INCREMENT = "INCREMENT"
+
+export const incAction = () => ({
+  type: INCREMENT
+})
+
+
+
+export const getReducer = (state: any = {count: 12}, action: TAction) => {
+  switch(action.type) {
+    case INCREMENT: 
+      return {
+        count: state.count + 1
+      }
+    default: 
+      return state
   }
-};
+} 

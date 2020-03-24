@@ -1,28 +1,32 @@
 import React from "react";
-import { Route, Redirect, Link } from "react-router-dom";
 import { ReactElement } from "react";
-import styles from "./LoginForm.module.css";
+import { reduxForm } from "redux-form";
+import { Dispatch } from "redux";
 
-import TextField from '../../components/TextField/TextField';
+
+import { incAction } from "../../store/index.reducer";
+import { formValidator, onlyEmail, passLength } from "../../utils/validators";
+
+import styles from "./LoginForm.module.css";
+import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink'
 import ErrorLogin from '../../components/ErrorLogin/ErrorLogin'
 
 export interface ILoginFormProps {
-  logIn: any;
 }
 
 type LoginFormProps = ILoginFormProps;
 
-let LoginForm = ({ logIn }: LoginFormProps): ReactElement<LoginFormProps> => {
+let LoginForm = ({ }: LoginFormProps): ReactElement<LoginFormProps> => {
 
   
   return (
     
       <div className={styles.formLayout}>
         <div className={styles.formContent}>
-          <TextField type="text" placeholder="Электронная почта"/>
-          <TextField type="password" placeholder="Пароль"/>
+          <InputField name='loginField' type="text" placeholder="Электронная почта"/>
+          <InputField name='passwordField' type="password" placeholder="Пароль"/>
           <Button isLogin={true} type='login' buttonText='Войти в систему' />
           <MyLink to='/register' linkText='Зарегистрироваться' />
         </div>
@@ -40,4 +44,7 @@ const mapStateToProps = (state: any) => {
 
 /*const connected;*/
 
-export default LoginForm;
+export default reduxForm({
+  form: 'LoginForm',
+  validate: formValidator
+})(LoginForm);
