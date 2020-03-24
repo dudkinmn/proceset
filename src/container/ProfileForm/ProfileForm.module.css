@@ -8,15 +8,12 @@
 .userHeader {
     position: relative;
     top: 24px;
-    width: 100%;
     box-sizing: border-box;
     margin: 0px 0px 0px 22px;
 }
 
 .userName {
     position: relative;
-    /*top: 0px;
-    left: 0; */
     font-family: Open Sans;
     font-style: normal;
     font-weight: bold;

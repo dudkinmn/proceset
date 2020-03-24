@@ -1,5 +1,6 @@
 .header {
-    padding:18px 0px 18px 60px; 
+    display: relative;
+    padding:18px 0px; 
     height: 24px;
     width: 100%;
     background: #FFFFFF;
@@ -8,7 +9,10 @@
 }
 
 .btnMenuHeaderText {
-    font-family: Open Sans;
+
+    position: absolute;
+    margin-left: 60px;
+
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -21,5 +25,5 @@
 .btnMenuHeaderIcon {
     
     position: absolute;
-    margin-left: -36px;
+    margin-left: 24px;
 }

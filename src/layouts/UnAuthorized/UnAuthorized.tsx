@@ -6,7 +6,7 @@ import RegisterForm from "../../container/RegisterForm/RegisterForm";
 
 import styles from "./UnAuthorized.module.css";
 
-/*import Logo from '../../components/Logo/Logo';*/
+import Logo from '../../components/Logo/Logo';
 
 export interface IUnAuthorizedProps {
   isRegister: boolean;
@@ -23,7 +23,7 @@ let UnAuthorized = ({
     <div className={styles.body}>
       <div className={styles.background} />
       <div className={styles.content}>
-        {/*<Logo/>*/}
+        <Logo/>
         {isRegister ? <RegisterForm /> : <LoginForm logIn={logIn} />}
       </div>
     </div>

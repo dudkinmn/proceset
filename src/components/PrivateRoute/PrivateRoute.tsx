@@ -4,9 +4,9 @@ import { ReactElement } from "react";
 
 export interface IPrivateRouteProps {
     component: any,
-    targetPath: any,
+    targetPath: string,
     isAuthorized: Boolean,
-    loginPath: any
+    loginPath: string
 }
 type PrivateRouteProps = IPrivateRouteProps
 

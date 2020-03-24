@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { ReactElement, useState } from "react";
 import Header from '../../components/Header/Header'
 import Profile from '../../container/ProfileForm/ProfileForm'
+import MainPage from '../../container/MainPage/MainPage'
 import Menu from '../../components/Menu/Menu'
 
 type NeedPage = 'main' | 'profile';
@@ -23,7 +24,7 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
     let renderSwitch = () => {
         switch(needPage) {
             case 'main':
-                return <Profile />;
+                return <MainPage />;
             case 'profile':
                 return <Profile />;
             default:
@@ -34,8 +35,8 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
     return (
         <>
-            { menuVisible ? <Menu setMenuVisible={setMenuVisible} /> : null}
-            <Header setMenuVisible={setMenuVisible}/>
+            {menuVisible ? <Menu setMenuVisible={setMenuVisible} /> : null}
+            {<Header setMenuVisible={setMenuVisible}/>}
             {renderSwitch()}
         </>
 
