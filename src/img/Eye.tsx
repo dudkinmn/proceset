@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { isFunction } from "lodash";
 import styles from "./Eye.module.css";
 
@@ -14,7 +15,7 @@ export const Eye: React.FC<IIcon & {
 }> = props => {
   const onClick = () => {
     if (isFunction(props.onClick)) {
-      props.onClick();
+   props.onClick();
     }
   };
 

@@ -19,7 +19,7 @@ export interface ITextFieldProps extends Partial<WrappedFieldProps>  {
 
 type TextFieldProps = ITextFieldProps;
 
-let TextField = ({ type, placeholder, withLabel, textLabel, meta}: TextFieldProps): any => {
+let TextField = ({ type, placeholder, withLabel, textLabel, meta}: TextFieldProps): ReactElement => {
   
   let [curType, setCurType] = useState(type)
 

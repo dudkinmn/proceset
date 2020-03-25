@@ -25,8 +25,8 @@ let LoginForm = ({ }: LoginFormProps): ReactElement<LoginFormProps> => {
     
       <div className={styles.formLayout}>
         <div className={styles.formContent}>
-          <InputField name='loginField' type="text" placeholder="Электронная почта"/>
-          <InputField name='passwordField' type="password" placeholder="Пароль"/>
+          <InputField name='loginField' type="text" placeholder="Электронная почта"  validate={[onlyEmail]}/>
+          <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passLength]}/>
           <Button isLogin={true} type='login' buttonText='Войти в систему' />
           <MyLink to='/register' linkText='Зарегистрироваться' />
         </div>
@@ -44,7 +44,9 @@ const mapStateToProps = (state: any) => {
 
 /*const connected;*/
 
-export default reduxForm({
+const NewLoginForm = reduxForm({
   form: 'LoginForm',
   validate: formValidator
 })(LoginForm);
+
+export default NewLoginForm
