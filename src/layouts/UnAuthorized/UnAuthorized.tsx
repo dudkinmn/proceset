@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect, Link } from "react-router-dom";
 import { ReactElement } from "react";
-import NewLoginForm from "../../container/LoginForm/LoginForm";
+import ConnectedLogin from "../../container/LoginForm/LoginForm";
 import RegisterForm from "../../container/RegisterForm/RegisterForm";
 
 import styles from "./UnAuthorized.module.css";
@@ -24,7 +24,7 @@ let UnAuthorized = ({
       <div className={styles.background} />
       <div className={styles.content}>
         <Logo/>
-        {isRegister ? <RegisterForm /> : <NewLoginForm />}
+        {isRegister ? <RegisterForm /> : <ConnectedLogin  />}
       </div>
     </div>
   );

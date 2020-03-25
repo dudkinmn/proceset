@@ -19,7 +19,7 @@ export interface ITextFieldProps extends Partial<WrappedFieldProps>  {
 
 type TextFieldProps = ITextFieldProps;
 
-let TextField = ({ type, placeholder, withLabel, textLabel, meta}: TextFieldProps): ReactElement => {
+let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFieldProps): ReactElement => {
   
   let [curType, setCurType] = useState(type)
 
@@ -47,12 +47,13 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta}: TextFieldProp
     <div className={styles.inputBlock} >
       {withLabel ? <label>{textLabel}</label> : null}
       {withLabel ?
-        <input className={styles.inputWithLabel} type={curType} placeholder={placeholder} />
+        <input className={styles.inputWithLabel} type={curType} placeholder={placeholder} {...input}/>
         :
-        <input className={styles.inputWithoutLabel} type={curType} placeholder={placeholder} />
+        <input className={styles.inputWithoutLabel} type={curType} placeholder={placeholder} {...input} />
       }
       
       {getEyeIcon()}
+      {console.log(meta)}
       {meta?.touched && meta.invalid ? <span>{meta.error}</span> : null}
       
     </div>

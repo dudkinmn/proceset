@@ -1,8 +1,9 @@
 import { isEmpty } from "lodash";
+import store from '../store/index.store'
 
 export const formValidator = (fields: any) => {
   const errors: any = {};
-  console.log(errors);
+  console.log("валидатор формы");
 
   if (isEmpty(fields.loginField)) {
     errors.loginField = "Not empty login field";
@@ -16,7 +17,8 @@ export const formValidator = (fields: any) => {
 };
 
 export const passLength = (len: number) => (value: string) => {
-  console.log(value);
+
+  console.log("валидатор инпут", value);
   return value?.length < len
     ? `Length of password will be more or equal ${len}`
     : null;
