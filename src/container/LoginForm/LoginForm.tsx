@@ -108,7 +108,10 @@ const mapDispatchToProps: MapDispatchToProps<
     }
   };
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 367a4527e35a24485d55737a4b57fa26dd243258
 const ConnectedLogin = connect<
   TLoginStateProps,
   TLoginDispatchProps,

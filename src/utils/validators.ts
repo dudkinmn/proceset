@@ -3,7 +3,12 @@ import store from '../store/index.store'
 
 export const formValidator = (fields: any) => {
   const errors: any = {};
+<<<<<<< HEAD
   console.log("валидатор формы");
+=======
+  console.log(errors);
+  console.log(store);
+>>>>>>> 367a4527e35a24485d55737a4b57fa26dd243258
 
   if (isEmpty(fields.loginField)) {
     errors.loginField = "Not empty login field";
