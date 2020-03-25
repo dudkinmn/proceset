@@ -23,7 +23,6 @@ input:hover {
 }
 
 label {
-
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -33,11 +32,7 @@ label {
     color: #999999;
 }
 
-
-
 .inputWithoutLabel {
-
-
     width: 100%;
     padding: 5px 35px 5px 11px;
     margin-bottom: 12px;
@@ -45,21 +40,45 @@ label {
 }
 
 .inputWithLabel {
-      
     position: absolute;
-    left: 284px;
+    left: 260px;
     width: 435px;
     height: 36px;
     padding: 5px 0px 7px 12px;
-
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    /*display: flex;*/
     align-items: center;
-
 }
 
+
+
+.errorMessageWithLabel {
+    position: absolute;
+    display: block;
+    top: 24px;
+    left: 267px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+    align-items: center;
+    color: #EE4141;
+    background: #ffffff
+}
+
+.errorMessageWithoutLabel {
+    position: absolute;
+    display: block;
+    top: 36px;
+    left: 0px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+    align-items: center;
+    color: #EE4141;
+}
 
 
 

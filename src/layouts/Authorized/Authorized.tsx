@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { ReactElement, useState } from "react";
 import Header from '../../components/Header/Header'
-import Profile from '../../container/ProfileForm/ProfileForm'
+import ConnectedProfile from '../../container/ProfileForm/ProfileForm'
 import MainPage from '../../container/MainPage/MainPage'
 import Menu from '../../components/Menu/Menu'
 
@@ -26,7 +26,7 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
             case 'main':
                 return <MainPage />;
             case 'profile':
-                return <Profile />;
+                return <ConnectedProfile />;
             default:
                 return <Redirect to='/'/>;
 

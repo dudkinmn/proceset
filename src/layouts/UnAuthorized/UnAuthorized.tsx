@@ -24,11 +24,7 @@ let UnAuthorized = ({
       <div className={styles.background} />
       <div className={styles.content}>
         <Logo/>
-<<<<<<< HEAD
         {isRegister ? <RegisterForm /> : <ConnectedLogin  />}
-=======
-        {isRegister ? <RegisterForm /> : <NewLoginForm  />}
->>>>>>> 367a4527e35a24485d55737a4b57fa26dd243258
       </div>
     </div>
   );

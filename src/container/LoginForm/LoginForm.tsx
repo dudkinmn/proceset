@@ -14,18 +14,13 @@ import {
   TLoginFormData
 } from "./LoginForm.types";
 import { incAction } from "../../store/index.reducer";
-import { formValidator, onlyEmail, passLength } from "../../utils/validators";
+import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
 
 import styles from "./LoginForm.module.css";
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
-import MyLink from '../../components/MyLink/MyLink'
-import ErrorLogin from '../../components/ErrorLogin/ErrorLogin'
-
-export interface ILoginFormProps {
-}
-
-type LoginFormProps = ILoginFormProps;
+import MyLink from '../../components/MyLink/MyLink';
+import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
 
 const server = new Promise((resolve, reject) => {
   resolve({
@@ -36,6 +31,7 @@ const server = new Promise((resolve, reject) => {
 });
 
 const passwordValidator = passLength(8);
+const emailValidator = onlyEmail();
 
 let LoginForm = ({ }: ILoginProps): ReactElement<ILoginState> => {
 
@@ -56,7 +52,7 @@ let LoginForm = ({ }: ILoginProps): ReactElement<ILoginState> => {
     
     <form onSubmit={handleSubmit} className={styles.formLayout}>
         <div className={styles.formContent}>
-          <InputField name='loginField' type="text" placeholder="Электронная почта"  validate={[onlyEmail]}/>
+          <InputField name='loginField' type="text" placeholder="Электронная почта"  validate={[emailValidator]}/>
           <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
           <Button isLogin={true} type='login' buttonText='Войти в систему' />
           <MyLink to='/register' linkText='Зарегистрироваться' />
@@ -64,26 +60,18 @@ let LoginForm = ({ }: ILoginProps): ReactElement<ILoginState> => {
 
         <ErrorLogin/>
 
-       </form>
+    </form>
     
   );
 };
 
-
-/*const connected;*/
-
-/*const NewLoginForm = reduxForm({
-  form: 'LoginForm',
-  validate: formValidator
-})(LoginForm);
-*/
 
 const connectedToReduxForm = reduxForm<
   TLoginFormData,
   TLoginOwnProps & TLoginStateProps & TLoginDispatchProps
 >({
   form: "loginForm",
-  validate: formValidator
+  validate: formLoginValidator
 });
 
 const mapStateToProps: MapStateToProps<TLoginStateProps, TLoginOwnProps> = (
@@ -103,15 +91,13 @@ const mapDispatchToProps: MapDispatchToProps<
   TLoginOwnProps
 > = (dispatch: Dispatch, ownProps: TLoginOwnProps) => {
   return {
-    onIncrement() {
+    onIncrement() { 
       dispatch(incAction());
     }
   };
-};
-<<<<<<< HEAD
+  };
 
-=======
->>>>>>> 367a4527e35a24485d55737a4b57fa26dd243258
+  
 const ConnectedLogin = connect<
   TLoginStateProps,
   TLoginDispatchProps,

@@ -46,15 +46,17 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFi
   return (
     <div className={styles.inputBlock} >
       {withLabel ? <label>{textLabel}</label> : null}
-      {withLabel ?
-        <input className={styles.inputWithLabel} type={curType} placeholder={placeholder} {...input}/>
-        :
-        <input className={styles.inputWithoutLabel} type={curType} placeholder={placeholder} {...input} />
-      }
-      
+      <input
+        className={withLabel ? styles.inputWithLabel : styles.inputWithoutLabel}
+        type={curType}
+        placeholder={placeholder}
+        {...input} />
       {getEyeIcon()}
-      {console.log(meta)}
-      {meta?.touched && meta.invalid ? <span>{meta.error}</span> : null}
+      {meta?.touched && meta.invalid ?
+        <span className={withLabel ? styles.errorMessageWithLabel : styles.errorMessageWithoutLabel}>
+          {meta.error}
+        </span>
+        : null}
       
     </div>
   );
