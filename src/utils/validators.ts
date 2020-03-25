@@ -1,8 +1,10 @@
 import { isEmpty } from "lodash";
+import store from '../store/index.store'
 
 export const formValidator = (fields: any) => {
   const errors: any = {};
   console.log(errors);
+  console.log(store);
 
   if (isEmpty(fields.loginField)) {
     errors.loginField = "Not empty login field";
