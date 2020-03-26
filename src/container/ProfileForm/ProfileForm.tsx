@@ -27,8 +27,13 @@ let ProfileForm = ({ }: IProfileProps): ReactElement<IProfileState> => {
 
     
   const passwordValidator = passLength(8);
-  const emailValidator = onlyEmail();
-    
+  const emailValidator = onlyEmail;
+
+  let initialValues =  {
+    nameField: 'Gtwef',
+    surnameField: 'wefwefwefwef'
+  }
+
   return ( 
     <div >
       <div className={styles.background}></div>
@@ -66,6 +71,8 @@ const mapStateToProps: MapStateToProps<TProfileStateProps, TProfileOwnProps> = (
   return {
     count: state?.count,
     initialValues: {
+      nameField: 'nameField',
+      surnameField: 'surnameField'
     }
   };
 };

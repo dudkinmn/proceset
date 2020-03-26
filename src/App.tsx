@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
+
 import "./index.css";
 import Header from "./components/Header/Header";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -69,15 +70,6 @@ function App({}: IAppProps): React.ReactElement<any> {
       </LoginContext.Provider>
     </>
   );
-
-  /*return (
-      <div>
-        {counter}
-        <button onClick={inc}>+</button>
-        <button onClick={dec}>-</button>
-        <div>Hello world</div>
-      </div>
-    );*/
 }
 
 export default App;

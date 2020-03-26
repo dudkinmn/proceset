@@ -1,9 +1,13 @@
 {
-  "folders": [{
+  "folders": [
+    {
       "path": "."
     },
     {
-      "path": "E:\\YandexDisk\\JS\\reactInfo\\proceset"
+      "path": "E:\\YandexDisk\\JS\\reactInfo\\redux-lesson"
+    },
+    {
+      "path": "E:\\YandexDisk\\JS\\reactInfo\\GQL-lesson"
     }
   ],
   "settings": {

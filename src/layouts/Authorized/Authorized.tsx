@@ -20,13 +20,17 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
     
     let [menuVisible, setMenuVisible] = useState(false);
     console.log("setMenuVisible=" + menuVisible);
+    let initialValues =  {
+        nameField: 'Gtwef',
+        surnameField: 'wefwefwefwef'
+      }
 
     let renderSwitch = () => {
         switch(needPage) {
             case 'main':
                 return <MainPage />;
             case 'profile':
-                return <ConnectedProfile />;
+                return <ConnectedProfile/>;
             default:
                 return <Redirect to='/'/>;
 

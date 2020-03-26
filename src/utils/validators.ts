@@ -56,7 +56,7 @@ export const formProfileValidator = (fields: any) => {
     errors.loginField = "Поле должно быть заполнено";
   }
 
-  if (fields.passwordField != fields.repeatpasswordField) {
+  if (fields.passwordField !== fields.repeatpasswordField) {
     errors.repeatpasswordField = "Пароли не совпадают"
   }
 
