@@ -29,11 +29,7 @@ let ProfileForm = ({ }: IProfileProps): ReactElement<IProfileState> => {
   const passwordValidator = passLength(8);
   const emailValidator = onlyEmail;
 
-  let initialValues =  {
-    nameField: 'Gtwef',
-    surnameField: 'wefwefwefwef'
-  }
-
+ 
   return ( 
     <div >
       <div className={styles.background}></div>

@@ -20,6 +20,7 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
     
     let [menuVisible, setMenuVisible] = useState(false);
     console.log("setMenuVisible=" + menuVisible);
+    
     let initialValues =  {
         nameField: 'Gtwef',
         surnameField: 'wefwefwefwef'

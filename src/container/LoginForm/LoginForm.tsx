@@ -4,6 +4,9 @@ import { reduxForm, SubmissionError } from "redux-form";
 import { Dispatch } from "redux";
 import { connect, MapStateToProps, MapDispatchToProps } from "react-redux";
 
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { withMutation, MutateProps } from "@apollo/react-hoc";
+import store from '../../store/index.store'
 
 import {
   ILoginProps,
@@ -11,10 +14,14 @@ import {
   TLoginStateProps,
   TLoginOwnProps,
   TLoginDispatchProps,
-  TLoginFormData
+  TLoginFormData,
+  ILogin,
+  ILoginVariables,
+  TlogInData
 } from "./LoginForm.types";
 import { incAction } from "../../store/index.reducer";
 import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
+import loginMutation from "../../queries/loginMutation";
 
 import styles from "./LoginForm.module.css";
 import InputField from '../../components/TextField/TextField';
@@ -22,43 +29,52 @@ import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink';
 import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
 
-const server = new Promise((resolve, reject) => {
-  resolve({
-    data: {
-      user: "Vasya"
-    }
-  });
-});
-
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
-let LoginForm = ({ }: ILoginProps): ReactElement<ILoginState> => {
+let LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
+
+  const [logIn, result] = useMutation<{}, TlogInData>(
+    loginMutation
+  );
 
   const handleSubmit = (fields: any) => {
-    console.warn(fields);
+
     return new Promise((resolve, reject) => {
-      server
+      logIn({
+        variables: {
+          email: fields.loginField,
+          password: fields.passwordField
+        }
+      })
         .then(res => {
+          console.log("res");
+          /**
+           * token ложим куда нужно
+           * и редиректим history.push
+           * res.data?.token;
+           * res.data?.user;
+           */
+
           resolve(res);
         })
         .catch(e => {
-          reject(new SubmissionError({ _error: "Что-то пошло не так" }));
+          reject(new SubmissionError({ _error: e?.message }));
         });
     });
   }
   
   return (
     
-    <form onSubmit={handleSubmit} className={styles.formLayout}>
-        <div className={styles.formContent}>
-          <InputField name='loginField' type="text" placeholder="Электронная почта"  validate={[emailValidator]}/>
-          <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
-          <Button isLogin={true} type='login' buttonText='Войти в систему' />
-          <MyLink to='/register' linkText='Зарегистрироваться' />
-        </div>
+    <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
+      <div className={styles.formContent}>
+        <InputField name='loginField' type="text" placeholder="Электронная почта" validate={[emailValidator]} />
+        <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
+        <Button isLogin={true} type='login' buttonText='Войти в систему' />
+        <MyLink to='/register' linkText='Зарегистрироваться' />
+      </div>
 
-        <ErrorLogin/>
+      {props.error ? <ErrorLogin /> : <></>}
 
     </form>
     
@@ -66,7 +82,7 @@ let LoginForm = ({ }: ILoginProps): ReactElement<ILoginState> => {
 };
 
 
-const connectedToReduxForm = reduxForm<
+/*const connectedToReduxForm = reduxForm<
   TLoginFormData,
   TLoginOwnProps & TLoginStateProps & TLoginDispatchProps
 >({
@@ -107,4 +123,19 @@ const ConnectedLogin = connect<
   mapDispatchToProps
 )(connectedToReduxForm(LoginForm));
 
-export default ConnectedLogin;
+export default ConnectedLogin; */
+
+const connectedToReduxForm = reduxForm<
+  TLoginFormData,
+  TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
+>({
+  form: "loginForm",
+  validate: formLoginValidator
+});
+
+export default withMutation<
+  TLoginOwnProps,
+  ILogin,
+  ILoginVariables,
+  TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
+>(loginMutation)(connectedToReduxForm(LoginForm));

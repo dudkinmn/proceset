@@ -1,11 +1,10 @@
 import { InjectedFormProps } from "redux-form";
+import { MutateProps } from "@apollo/react-hoc";
 
 export type TLoginStateProps = {
-  count: number;
 };
 
 export type TLoginDispatchProps = {
-  onIncrement(): void;
 };
 
 export type TLoginOwnProps = {
@@ -19,10 +18,37 @@ export type TLoginFormData = {
 export interface ILoginProps
   extends InjectedFormProps<
       TLoginFormData,
-      TLoginOwnProps & TLoginDispatchProps & TLoginStateProps
+      TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
     >,
     TLoginOwnProps,
-    TLoginDispatchProps,
-  TLoginStateProps { }
+    MutateProps<ILogin, ILoginVariables> {}
     
-export interface ILoginState {}
+export interface ILoginState { }
+
+export type TUser = {
+  id: number;
+  firstName: string;
+  secondName: string;
+  email: string;
+};
+
+export interface ILogin {
+  token: String;
+  user: TUser;
+}
+
+export interface ILoginVariables {
+  email: string;
+  password: string;
+}
+
+export type TlogIn = {
+  email: string;
+  password: string;
+}
+
+export type TlogInData = { 
+  email: string;
+  password: string;
+};
+

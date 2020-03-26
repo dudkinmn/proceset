@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 
+
 import "./index.css";
 import Header from "./components/Header/Header";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -10,6 +11,17 @@ import { Provider as ReduxProvider } from "react-redux";
 import store from "./store/index.store";
 
 export interface IAppProps {}
+
+// client.query({
+//   query: gql`
+//     query {
+//       processList {
+//         id
+//         name
+//       }
+//     }
+//   `
+// });
 
 function App({}: IAppProps): React.ReactElement<any> {
   let [counter, setCounter] = useState(0);
