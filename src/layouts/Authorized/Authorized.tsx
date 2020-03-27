@@ -59,7 +59,6 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
     return (
         <>  
-            {console.log(data)}
             {menuVisible ? <Menu setMenuVisible={setMenuVisible} /> : null}
             {<Header setMenuVisible={setMenuVisible}/>}
             {renderSwitch()}
