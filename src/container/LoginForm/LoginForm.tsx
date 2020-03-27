@@ -1,7 +1,5 @@
-import React from "react";
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { reduxForm, SubmissionError } from "redux-form";
-import { connect, MapStateToProps, MapDispatchToProps } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
 
@@ -15,7 +13,6 @@ import {
   TSigninData,
   TSigninResponceData
 } from "./LoginForm.types";
-import { incAction } from "../../store/index.reducer";
 import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
 import signinMutation from "../../queries/signinMutation";
 
@@ -31,7 +28,7 @@ const emailValidator = onlyEmail();
 
 const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
 
-  const [signin, result] = useMutation<{}, TSigninData>(
+  const [signin] = useMutation<{}, TSigninData>(
     signinMutation
   );
 
@@ -48,7 +45,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
           console.log(res.data?.login);
           localStorage.setItem('token', res.data?.login?.token ? res.data.login.token : "" );
           history.push('/profile');
-
+          
           /**
            * token ложим куда нужно
            * и редиректим history.push

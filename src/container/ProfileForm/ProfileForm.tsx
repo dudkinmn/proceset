@@ -1,18 +1,11 @@
-import React from "react";
-import { Route, Redirect, Link } from "react-router-dom";
-import { ReactElement } from "react";
-import { reduxForm, SubmissionError } from "redux-form";
-import { connect, MapStateToProps, MapDispatchToProps } from "react-redux";
-import { Dispatch } from "redux";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import React,  { ReactElement } from "react";
+import { reduxForm } from "redux-form";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
 
 import {
   IProfileProps,
   IProfileState,
-  TProfileStateProps,
   TProfileOwnProps,
-  TProfileDispatchProps,
   TProfileFormData,
   IProfile,
   IProfileVariables,
@@ -26,7 +19,7 @@ import styles from "./ProfileForm.module.css";
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 
-const ProfileForm = ({ }: IProfileProps): ReactElement<IProfileState> => {
+const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> => {
 
   const passwordValidator = passLength(8);
   const emailValidator = onlyEmail;

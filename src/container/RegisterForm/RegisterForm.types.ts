@@ -49,10 +49,15 @@ export type TRegister = {
   password: string;
 }
 
-export type TRegisterData = { 
-    firstName: string;
-    secondName: string;
-    email: string;
-    password: string;
+export type TSignupData = { 
+  firstName: string;
+  secondName: string;
+  email: string;
+  password: string;
 };
 
+export type TSignupResponceData = {
+  data?: {
+    signup?: string
+  }
+}

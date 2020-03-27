@@ -1,9 +1,7 @@
-import React, { ReactFragment } from "react";
-import { ReactElement, useState} from "react";
-
+import React, { ReactElement, useState } from "react";
+import { Field, WrappedFieldProps, BaseFieldProps } from "redux-form";
 
 import { Eye } from "../../img/Eye";
-import { Field, WrappedFieldProps, BaseFieldProps } from "redux-form";
 import styles from "./TextField.module.css";
 
 

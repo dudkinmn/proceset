@@ -1,15 +1,12 @@
-import React from "react";
-import { ReactElement } from "react";
-import { Link } from 'react-router-dom';
+import React, { ReactElement } from "react";
+
 import styles from "./ErrorLogin.module.css";
 
-export interface IErrorLoginProps {
-
-}
+export interface IErrorLoginProps {}
 
 type ErrorLoginProps = IErrorLoginProps;
 
-let ErrorLogin = ({}: ErrorLoginProps): ReactElement<ErrorLoginProps> => {
+let ErrorLogin = ({ ...props}: ErrorLoginProps): ReactElement<ErrorLoginProps> => {
     return (
     <div className={styles.error}>
         <svg className={styles.errorIcon} width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,6 +17,5 @@ let ErrorLogin = ({}: ErrorLoginProps): ReactElement<ErrorLoginProps> => {
     </div>
   );
 };
-
 
 export default ErrorLogin;

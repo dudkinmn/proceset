@@ -1,7 +1,6 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { ReactElement, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { ReactElement, useState } from "react";
 import Header from '../../components/Header/Header'
 import ConnectedProfile from '../../container/ProfileForm/ProfileForm'
 import MainPage from '../../container/MainPage/MainPage'
@@ -28,7 +27,6 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
                 return <ConnectedProfile/>;
             default:
                 return <Redirect to='/'/>;
-
         }
     }
 
@@ -38,10 +36,8 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
             {<Header setMenuVisible={setMenuVisible}/>}
             {renderSwitch()}
         </>
-
     )
 
 }
-
 
 export default Authorized

@@ -1,14 +1,12 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { isFunction } from "lodash";
-import styles from "./Eye.module.css";
 
+import styles from "./Eye.module.css";
 
 interface IIcon {
   className?: string;
   onClick?: any;
 }
-
 
 export const Eye: React.FC<IIcon & {
   closed: boolean;

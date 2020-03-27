@@ -1,43 +1,33 @@
-import React from "react";
-import { Route, Redirect, Link } from "react-router-dom";
-import { ReactElement } from "react";
-import styles from "./RegisterForm.module.css";
-
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import React, { ReactElement } from "react";
+import { useMutation } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
+import { reduxForm, SubmissionError } from "redux-form";
 
 import {
   IRegisterProps,
   IRegisterState,
-  TRegisterStateProps,
   TRegisterOwnProps,
-  TRegisterDispatchProps,
   TRegisterFormData,
   IRegister,
   IRegisterVariables,
-  TRegisterData
+  TSignupData,
+  TSignupResponceData
 } from "./RegisterForm.types";
-import { incAction } from "../../store/index.reducer";
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 import signupMutation from "../../queries/signupMutation";
-
-import { reduxForm, SubmissionError } from "redux-form";
+import history from '../../utils/history'
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink'
-import ErrorLogin from '../../components/ErrorLogin/ErrorLogin'
-
-export interface IRegisterFormProps {
-}
-
-type RegisterFormProps = IRegisterFormProps;
+import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
+import styles from "./RegisterForm.module.css";
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
 const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState> => {
   
-  const [signup, result] = useMutation<{}, TRegisterData>(signupMutation);
+  const [signup] = useMutation<{}, TSignupData>(signupMutation);
 
   const handleSubmit = (fields: any) => {
 
@@ -50,8 +40,10 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
           password: fields.passwordField
         }
       })
-        .then(res => {
+        .then((res: TSignupResponceData) => {
           console.log(res);
+          localStorage.setItem('token', res.data?.signup ? res.data.signup : "" );
+          history.push('/profile');
           /**
            * token ложим куда нужно
            * и редиректим history.push

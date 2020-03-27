@@ -17,8 +17,7 @@ const PrivateRoute = ({
   loginPath
 }: PrivateRouteProps):ReactElement<PrivateRouteProps> => (
     <>
-      {console.log("перед роутом"+ localStorage.getItem('token'))}
-      {console.log("перед роутом"+isAuthorized)}
+      {console.log("перед роутом"+ isAuthorized)}
       {console.log("перед роутом"+ targetPath)}
       <Route path={targetPath} render={():ReactElement<PrivateRouteProps> => (isAuthorized ?
             (<>
@@ -30,8 +29,7 @@ const PrivateRoute = ({
               {console.log('в редитрете')};
               <Redirect to={loginPath} />
             </>)
-      )}
-      />
+      )}/>
     </> 
   )
 export default PrivateRoute

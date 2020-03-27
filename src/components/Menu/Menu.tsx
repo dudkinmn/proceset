@@ -1,7 +1,6 @@
-import React, { ReactElement, useState } from "react";
-import {Redirect} from 'react-router-dom'
-import styles from "./Menu.module.css";
+import React, { ReactElement} from "react";
 
+import styles from "./Menu.module.css";
 import history from '../../utils/history'
 import { IconMenuLight, ProductName, IconUser, IconMain, IconQuit } from '../../img/icons'
 

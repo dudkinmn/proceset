@@ -1,19 +1,13 @@
-import React from "react";
-import { Route, Redirect, Link } from "react-router-dom";
-import { ReactElement } from "react";
-import styles from "./MainPage.module.css";
+import React,  { ReactElement }  from "react";
 
-import TextField from '../../components/TextField/TextField';
-import Button from '../../components/Button/Button';
-import MyLink from '../../components/MyLink/MyLink'
-import ErrorLogin from '../../components/ErrorLogin/ErrorLogin'
+import styles from "./MainPage.module.css";
 
 export interface IMainPageProps {
 }
 
 type MainPageProps = IMainPageProps;
 
-let MainPage = ({ }: MainPageProps): ReactElement<MainPageProps> => {
+let MainPage = ({ ...props }: MainPageProps): ReactElement<MainPageProps> => {
 
   
   return (

@@ -1,12 +1,9 @@
-import React from "react";
-import { Route, Redirect, Link } from "react-router-dom";
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
+
 import LoginForm from "../../container/LoginForm/LoginForm";
 import RegisterForm from "../../container/RegisterForm/RegisterForm";
-
-import styles from "./UnAuthorized.module.css";
-
 import Logo from '../../components/Logo/Logo';
+import styles from "./UnAuthorized.module.css";
 
 export interface IUnAuthorizedProps {
   isRegister: boolean;

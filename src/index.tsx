@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router,  BrowserRouter } from 'react-router-dom';
+import { Router} from 'react-router-dom';
 import { Provider as ReduxProvider } from "react-redux";
 import { ApolloProvider } from "@apollo/react-hoc";
 
