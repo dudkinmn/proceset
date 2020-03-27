@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Header from '../../components/Header/Header'
-import ConnectedProfile from '../../container/ProfileForm/ProfileForm'
+import ProfileForm from '../../container/ProfileForm/ProfileForm'
 import MainPage from '../../container/MainPage/MainPage'
 import Menu from '../../components/Menu/Menu'
 
@@ -24,7 +24,10 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
             case 'main':
                 return <MainPage />;
             case 'profile':
-                return <ConnectedProfile/>;
+                return <ProfileForm initialValues={{
+                    firstNameField: "ewfwefwefwef",
+                    secondNameField: 'wefwefwef'
+                }} />;
             default:
                 return <Redirect to='/'/>;
         }

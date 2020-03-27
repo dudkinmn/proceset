@@ -26,6 +26,7 @@ const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> =
   
   return ( 
     <div >
+      {console.log(props)}
       <div className={styles.background}/>>
 
       <div className={styles.userHeader}>

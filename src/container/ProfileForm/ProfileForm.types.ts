@@ -2,29 +2,36 @@ import { InjectedFormProps } from "redux-form";
 import { MutateProps } from "@apollo/react-hoc";
 
 export type TProfileStateProps = {
+    
 };
 
 export type TProfileDispatchProps = {
 };
 
 export type TProfileOwnProps = {
+  
+    initialValues : {
+      firstNameField: string;
+      secondNameField: string;
+    }
 };
 
 export type TProfileFormData = {
-  loginField: string;
-  passwordField: string;
+
 };
 
 export interface IProfileProps
   extends InjectedFormProps<
       TProfileFormData,
-      TProfileOwnProps & TProfileDispatchProps & TProfileStateProps & MutateProps<IProfile, IProfileVariables>
+      TProfileOwnProps /*& TProfileDispatchProps & TProfileStateProps*/ & MutateProps<IProfile, IProfileVariables>
     >,
-    TProfileOwnProps,
     TProfileDispatchProps,
-  TProfileStateProps { }
+  TProfileStateProps {
+   }
     
-export interface IProfileState { }
+export interface IProfileState {
+    
+ }
 
 export type TUser = {
   id: number;
