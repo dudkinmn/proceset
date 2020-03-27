@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
+import { isEmpty } from "lodash";
 
 
 import "./index.css";
@@ -24,33 +25,15 @@ export interface IAppProps {}
 // });
 
 function App({}: IAppProps): React.ReactElement<any> {
-  let [counter, setCounter] = useState(0);
-  let [isAuthorized, setIsAuthorized] = useState(false);
+  let isAuthorized = !(isEmpty(localStorage.getItem("token")))
 
-  function inc() {
-    setCounter(++counter);
-  }
-
-  function dec() {
-    setCounter(--counter);
-  }
-
-  const logIn = () => {
-    console.log("я в аппе логин");
-    setIsAuthorized(true);
-    console.log("я в аппе логин =" + isAuthorized);
-  };
-
-  const logOut = () => {
-    console.log("я в аппе логаут");
-    setIsAuthorized(false);
-  };
+  
 
   const pages = {
     main: () => <Authorized needPage={"main"} />,
     profile: () => <Authorized needPage={"profile"} />,
-    login: () => <UnAuthorized isRegister={false} logIn={logIn} />,
-    register: () => <UnAuthorized isRegister={true} logIn={logIn} />,
+    login: () => <UnAuthorized isRegister={false} />,
+    register: () => <UnAuthorized isRegister={true} />,
     notFound: () => <div>404. Страница не найдена</div>
   };
 
@@ -61,23 +44,32 @@ function App({}: IAppProps): React.ReactElement<any> {
           <Route exact path="/" component={pages.login} />
           <Route path="/register" component={pages.register} />
           <Route path="/login" component={pages.login} />
-          
-          <Route path="/main" component={pages.main} />
-          <Route path="/profile" component={pages.profile} />
 
-          {/*<PrivateRoute
+          <PrivateRoute
+              component={pages.profile}
+              targetPath="/profile"
+              isAuthorized={isAuthorized}
+              loginPath="/login"
+          />
+          
+          <PrivateRoute
             component={pages.main}
             targetPath="/main"
             isAuthorized={isAuthorized}
             loginPath="/login"
           />
+          
+          {/*<Route path="/main" component={pages.main} />
+          <Route path="/profile" component={pages.profile} />*/}
+
+          {/*
 
             <PrivateRoute
               component={pages.profile}
               targetPath="/profile"
               isAuthorized={isAuthorized}
-          loginPath="/login"*/}
-          />
+          loginPath="/login"
+          />*/}
         </Switch>
       </LoginContext.Provider>
     </>

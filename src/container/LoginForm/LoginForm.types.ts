@@ -47,8 +47,22 @@ export type TlogIn = {
   password: string;
 }
 
-export type TlogInData = { 
+export type TSigninData = { 
   email: string;
   password: string;
+};
+
+export type TSigninResponceData = { 
+  data?: {
+    login ?: {
+      token?: string;
+      user?: {
+        id: number;
+        firstName: string;
+        secondName: string;
+        email: string;
+      }
+    }
+  }
 };
 

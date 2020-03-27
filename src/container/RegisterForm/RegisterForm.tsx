@@ -3,7 +3,23 @@ import { Route, Redirect, Link } from "react-router-dom";
 import { ReactElement } from "react";
 import styles from "./RegisterForm.module.css";
 
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { withMutation, MutateProps } from "@apollo/react-hoc";
 
+import {
+  IRegisterProps,
+  IRegisterState,
+  TRegisterStateProps,
+  TRegisterOwnProps,
+  TRegisterDispatchProps,
+  TRegisterFormData,
+  IRegister,
+  IRegisterVariables,
+  TRegisterData
+} from "./RegisterForm.types";
+import { incAction } from "../../store/index.reducer";
+import { formValidator, onlyEmail, passLength } from "../../utils/validators";
+import signupMutation from "../../queries/signupMutation";
 
 import { reduxForm, SubmissionError } from "redux-form";
 import InputField from '../../components/TextField/TextField';
@@ -16,19 +32,53 @@ export interface IRegisterFormProps {
 
 type RegisterFormProps = IRegisterFormProps;
 
-let RegisterForm = ({}: RegisterFormProps): ReactElement<RegisterFormProps> => {
+const passwordValidator = passLength(8);
+const emailValidator = onlyEmail();
 
+const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState> => {
   
+  const [signup, result] = useMutation<{}, TRegisterData>(signupMutation);
+
+  const handleSubmit = (fields: any) => {
+
+    return new Promise((resolve, reject) => {
+      signup({
+        variables: {
+          firstName: fields.firstNameField,
+          secondName: fields.secondNameField,
+          email: fields.loginField,
+          password: fields.passwordField
+        }
+      })
+        .then(res => {
+          console.log(res);
+          /**
+           * token ложим куда нужно
+           * и редиректим history.push
+           * res.data?.token;
+           * res.data?.user;
+           */
+
+          resolve(res);
+        })
+        .catch(e => {
+          console.log(e?.message);
+          reject(new SubmissionError({ _error: e?.message }));
+        });
+    });
+  }
+
+
   return (
     
-      <div className={styles.formLayout}>
+      <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
         <div className={styles.formContent}>
               <p className={styles.headReg}>Регистрация</p>
-              <InputField name='nameField' type="text" placeholder="Имя"/>
-              <InputField name='surnameField' type="text" placeholder="Фамилия" />
-              <InputField name='emailField' type="email" placeholder="Электронная почта"/>
-              <InputField name='passwordField' type="password" placeholder="Введите пароль"/>
-              <InputField name='repaetpasswordField' type="password" placeholder="Повторите пароль"/>
+              <InputField name='firstNameField' type="text" placeholder="Имя"/>
+              <InputField name='secondNameField' type="text" placeholder="Фамилия" />
+              <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]}/>
+              <InputField name='passwordField' type="password" placeholder="Введите пароль" validate={[passwordValidator]}/>
+              <InputField name='repeatpasswordField' type="password" placeholder="Повторите пароль" validate={[passwordValidator]}/>
               <Button isLogin={true} type='login' buttonText='Применить и войти' />
               <p>Уже зарегистрированы?
                       <MyLink to='/login' linkText='Вход'/>
@@ -36,19 +86,24 @@ let RegisterForm = ({}: RegisterFormProps): ReactElement<RegisterFormProps> => {
               
           </div>
 
-          <ErrorLogin/>
+          {props.error ? <ErrorLogin /> : <></>}
 
-       </div>
+       </form>
     
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {};
-};
+const connectedToReduxForm = reduxForm<
+  TRegisterFormData,
+  TRegisterOwnProps & MutateProps<IRegister, IRegisterVariables>
+>({
+  form: "registerForm",
+  validate: formValidator
+});
 
-/*const connected;*/
-
-export default reduxForm({
-  form: 'RegisterForm'
-})(RegisterForm);
+export default withMutation<
+  TRegisterOwnProps,
+  IRegister,
+  IRegisterVariables,
+  TRegisterOwnProps & MutateProps<IRegister, IRegisterVariables>
+>(signupMutation)(connectedToReduxForm(RegisterForm));

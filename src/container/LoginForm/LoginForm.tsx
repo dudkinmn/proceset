@@ -1,28 +1,25 @@
 import React from "react";
 import { ReactElement } from "react";
 import { reduxForm, SubmissionError } from "redux-form";
-import { Dispatch } from "redux";
 import { connect, MapStateToProps, MapDispatchToProps } from "react-redux";
-
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
-import store from '../../store/index.store'
 
 import {
   ILoginProps,
   ILoginState,
-  TLoginStateProps,
   TLoginOwnProps,
-  TLoginDispatchProps,
   TLoginFormData,
   ILogin,
   ILoginVariables,
-  TlogInData
+  TSigninData,
+  TSigninResponceData
 } from "./LoginForm.types";
 import { incAction } from "../../store/index.reducer";
 import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
-import loginMutation from "../../queries/loginMutation";
+import signinMutation from "../../queries/signinMutation";
 
+import history from '../../utils/history'
 import styles from "./LoginForm.module.css";
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
@@ -32,23 +29,26 @@ import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
-let LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
+const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
 
-  const [logIn, result] = useMutation<{}, TlogInData>(
-    loginMutation
+  const [signin, result] = useMutation<{}, TSigninData>(
+    signinMutation
   );
 
   const handleSubmit = (fields: any) => {
 
     return new Promise((resolve, reject) => {
-      logIn({
+      signin({
         variables: {
-          email: fields.loginField,
+          email: fields.emailField,
           password: fields.passwordField
         }
       })
-        .then(res => {
-          console.log("res");
+        .then((res: TSigninResponceData) => {
+          console.log(res.data?.login);
+          localStorage.setItem('token', res.data?.login?.token ? res.data.login.token : "" );
+          history.push('/profile');
+
           /**
            * token ложим куда нужно
            * и редиректим history.push
@@ -68,7 +68,7 @@ let LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
     
     <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
       <div className={styles.formContent}>
-        <InputField name='loginField' type="text" placeholder="Электронная почта" validate={[emailValidator]} />
+        <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]} />
         <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
         <Button isLogin={true} type='login' buttonText='Войти в систему' />
         <MyLink to='/register' linkText='Зарегистрироваться' />
@@ -138,4 +138,4 @@ export default withMutation<
   ILogin,
   ILoginVariables,
   TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
->(loginMutation)(connectedToReduxForm(LoginForm));
+>(signinMutation)(connectedToReduxForm(LoginForm));

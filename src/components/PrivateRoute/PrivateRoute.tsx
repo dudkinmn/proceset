@@ -17,16 +17,18 @@ const PrivateRoute = ({
   loginPath
 }: PrivateRouteProps):ReactElement<PrivateRouteProps> => (
     <>
+      {console.log("перед роутом"+ localStorage.getItem('token'))}
+      {console.log("перед роутом"+isAuthorized)}
       {console.log("перед роутом"+ targetPath)}
       <Route path={targetPath} render={():ReactElement<PrivateRouteProps> => (isAuthorized ?
             (<>
-              {console.log("в рендере" )};
-              {component()};
+              {console.log("в рендере" )}
+              {component()}
             </>)
             :
             (<>
               {console.log('в редитрете')};
-              <Redirect to={loginPath} />;
+              <Redirect to={loginPath} />
             </>)
       )}
       />

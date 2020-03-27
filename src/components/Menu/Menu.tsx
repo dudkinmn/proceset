@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import styles from "./Menu.module.css";
 
 import history from '../../utils/history'
-import { IconMenuLight, ProductName, IconUser, IconMain } from '../../img/icons'
+import { IconMenuLight, ProductName, IconUser, IconMain, IconQuit } from '../../img/icons'
 
 export interface IMenuProps {
   setMenuVisible: any
@@ -28,6 +28,13 @@ let Menu = ({  setMenuVisible}: MenuProps): ReactElement<MenuProps> => {
         <div onClick={() => history.push('/main')} className={styles.btn}>
             <div className={styles.btnMenuIcon}><IconMain /></div>
             <div className={styles.btnMenuTextOth}>Список процессов</div>
+        </div>
+        <div onClick={() => {
+                      history.push('/');
+                      localStorage.setItem('token', "" );}} 
+             className={styles.btn}>
+            <div className={styles.btnMenuIcon}><IconQuit /></div>
+            <div className={styles.btnMenuTextOth}>Выход из системы</div>
         </div>
 
 

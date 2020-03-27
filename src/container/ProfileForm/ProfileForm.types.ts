@@ -1,11 +1,10 @@
 import { InjectedFormProps } from "redux-form";
+import { MutateProps } from "@apollo/react-hoc";
 
 export type TProfileStateProps = {
-  count: number;
 };
 
 export type TProfileDispatchProps = {
-  onIncrement(): void;
 };
 
 export type TProfileOwnProps = {
@@ -19,10 +18,38 @@ export type TProfileFormData = {
 export interface IProfileProps
   extends InjectedFormProps<
       TProfileFormData,
-      TProfileOwnProps & TProfileDispatchProps & TProfileStateProps
+      TProfileOwnProps & TProfileDispatchProps & TProfileStateProps & MutateProps<IProfile, IProfileVariables>
     >,
     TProfileOwnProps,
     TProfileDispatchProps,
   TProfileStateProps { }
     
-export interface IProfileState {}
+export interface IProfileState { }
+
+export type TUser = {
+  id: number;
+  firstName: string;
+  secondName: string;
+  email: string;
+};
+
+export interface IProfile {
+  token: String;
+  user: TUser;
+}
+
+export interface IProfileVariables {
+  email: string;
+  password: string;
+}
+
+export type TProfile = {
+  email: string;
+  password: string;
+}
+
+export type TProfileData = { 
+  email: string;
+  password: string;
+};
+
