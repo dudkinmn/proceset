@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { Field, WrappedFieldProps, BaseFieldProps } from "redux-form";
+import { isString } from 'lodash'
 
 import { Eye } from "../../img/Eye";
 import styles from "./TextField.module.css";
@@ -43,19 +44,17 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFi
   
   return (
     <div className={styles.inputBlock} >
-      {withLabel ? <label>{textLabel}</label> : null}
+      {withLabel && <label>{textLabel}</label>}
       <input
         className={withLabel ? styles.inputWithLabel : styles.inputWithoutLabel}
         type={curType}
         placeholder={placeholder}
         {...input} />
       {getEyeIcon()}
-      {meta?.touched && meta.invalid ?
+      {(meta?.touched && meta.invalid) &&
         <span className={withLabel ? styles.errorMessageWithLabel : styles.errorMessageWithoutLabel}>
-          {meta.error}
-        </span>
-        : null}
-      
+          {isString(meta?.error) && meta?.error}
+        </span>}
     </div>
   );
 };

@@ -67,7 +67,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
       <div className={styles.formContent}>
         <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]} />
         <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
-        <Button isLogin={true} type='login' buttonText='Войти в систему' />
+        <Button isLogin={true} buttonText='Войти в систему' />
         <MyLink to='/register' linkText='Зарегистрироваться' />
       </div>
 

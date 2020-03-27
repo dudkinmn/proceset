@@ -4,24 +4,18 @@ import styles from "./Button.module.css";
 
 export interface IButtonProps {
   buttonText: string
-  type: string;
-  isLogin: boolean
+  isLogin: boolean,
+  disabled?: boolean 
 }
 
 type ButtonProps = IButtonProps;
 
-let Button = ({type, buttonText, isLogin}: ButtonProps): ReactElement<ButtonProps> => {
+let Button = ({buttonText, isLogin, disabled = false}: ButtonProps): ReactElement<ButtonProps> => {
   return (
-    <>
-      {
-        isLogin ?
-          <button className={styles.buttonLogin}>{buttonText }</button >
-        :
-         <button className={styles.buttonSave}>{buttonText }</button >
-
-    }
-      </>
-    
+    <button className={isLogin ? styles.buttonLogin : styles.buttonSave}
+            disabled={disabled}>          
+      {buttonText}
+    </button >
   );
 };
 

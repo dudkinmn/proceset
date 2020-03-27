@@ -1,35 +1,31 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { ReactElement } from "react";
+import { isEmpty } from 'lodash';
 
 export interface IPrivateRouteProps {
     component: any,
     targetPath: string,
-    isAuthorized: Boolean,
     loginPath: string
-}
+} 
 type PrivateRouteProps = IPrivateRouteProps
 
 const PrivateRoute = ({
   component,
   targetPath,
-  isAuthorized,
   loginPath
-}: PrivateRouteProps):ReactElement<PrivateRouteProps> => (
-    <>
-      {console.log("перед роутом"+ isAuthorized)}
-      {console.log("перед роутом"+ targetPath)}
-      <Route path={targetPath} render={():ReactElement<PrivateRouteProps> => (isAuthorized ?
-            (<>
-              {console.log("в рендере" )}
-              {component()}
-            </>)
-            :
-            (<>
-              {console.log('в редитрете')};
-              <Redirect to={loginPath} />
-            </>)
-      )}/>
-    </> 
+}: PrivateRouteProps): ReactElement<PrivateRouteProps> => {
+    
+  let isAuthorized = isEmpty(localStorage.getItem("token")) ? false : true ;  
+
+  return (
+
+    <Route exact render={() => (
+      isAuthorized ?
+      component:
+      <Redirect to={loginPath} />)} path={targetPath} />
   )
+}
 export default PrivateRoute
+
+

@@ -71,7 +71,7 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
               <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]}/>
               <InputField name='passwordField' type="password" placeholder="Введите пароль" validate={[passwordValidator]}/>
               <InputField name='repeatpasswordField' type="password" placeholder="Повторите пароль" validate={[passwordValidator]}/>
-              <Button isLogin={true} type='login' buttonText='Применить и войти' />
+              <Button isLogin={true} buttonText='Применить и войти' />
               <p>Уже зарегистрированы?
                       <MyLink to='/login' linkText='Вход'/>
               </p>

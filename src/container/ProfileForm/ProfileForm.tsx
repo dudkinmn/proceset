@@ -1,6 +1,8 @@
 import React,  { ReactElement } from "react";
-import { reduxForm } from "redux-form";
+import { reduxForm, SubmissionError } from "redux-form";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
+import { useMutation } from "@apollo/react-hooks";
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   IProfileProps,
@@ -9,42 +11,74 @@ import {
   TProfileFormData,
   IProfile,
   IProfileVariables,
-  TProfileData
+  TProfileData,
+
+  TEditUserData,
+  TEditUserResponceData
 } from "./ProfileForm.types";
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 
 
-import signupMutation from "../../queries/signupMutation";
+import editUserMutation from "../../queries/editUserMutation";
 import styles from "./ProfileForm.module.css";
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 
+const passwordValidator = passLength(8);
+const emailValidator = onlyEmail();
+
+
+
 const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> => {
 
-  const passwordValidator = passLength(8);
-  const emailValidator = onlyEmail;
+  
+  console.log(props);
+  const [editUser] = useMutation<{}, TEditUserData>(editUserMutation);
+
+  const handleSubmit = (fields: any) => {
+
+    return new Promise((resolve, reject) => {
+      editUser({
+        variables: {
+          id: Number(localStorage.getItem('Id')),
+          firstName: fields.firstNameField,
+          secondName: fields.secondNameField,
+          email: fields.emailField,
+          password: fields.passwordField
+        }
+      })
+        .then((res: TEditUserResponceData) => {
+          console.log(res);
+          resolve(res);
+        })
+        .catch(e => {
+          console.log(e?.message);
+          reject(new SubmissionError({ _error: e?.message }));
+        });
+    });
+  }
   
   return ( 
-    <div >
-      {console.log(props)}
-      <div className={styles.background}/>>
+    <form onSubmit={props.handleSubmit(handleSubmit)}>
+      <div className={styles.background}/>
 
       <div className={styles.userHeader}>
-        <h1 className={styles.userName}>Борис Годунов. Редактирование </h1>
-        <Button isLogin={false} type='login' buttonText='Сохранить' />
+        <h1 className={styles.userName}>{props.initialValues.firstNameField + " " + props.initialValues.secondNameField}. Редактирование</h1>
+        <Button isLogin={false} disabled={ !(props.dirty && props.anyTouched)} buttonText='Сохранить' />
       </div>
       
       <div className={styles.userData}>
         <InputField name='firstNameField' type='text' placeholder='Борис' withLabel={true} textLabel='Имя' />
         <InputField name='secondNameField' type='text' placeholder='Годунов' withLabel={true} textLabel='Фамилия' />
         <InputField name='emailField' type='email' placeholder='qwerty@yandex.ru.' withLabel={true} textLabel='Электронная почта' validate={[emailValidator]} />
-        <InputField name='passwordField' type='password' placeholder='********' withLabel={true} textLabel='Новый пароль' validate={[passwordValidator]}/>
+        <InputField name='passwordField' type='password' placeholder='********' withLabel={true} textLabel='Новый пароль' validate={[passwordValidator]} />
         <InputField name='repeatpasswordField' type='password' placeholder='********' withLabel={true} textLabel='Повторите пароль' validate={[passwordValidator]} />
       </div>
-    </div>
+    </form>
     
   );
 };
+
 
 
 /*const connectedToReduxForm = reduxForm<
@@ -104,5 +138,5 @@ export default withMutation<
   IProfile,
   IProfileVariables,
   TProfileOwnProps & MutateProps<IProfile, IProfileVariables>
->(signupMutation)(connectedToReduxForm(ProfileForm));
+>(editUserMutation)(connectedToReduxForm(ProfileForm));
 
