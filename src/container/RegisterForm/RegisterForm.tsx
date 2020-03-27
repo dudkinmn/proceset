@@ -46,7 +46,7 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
         variables: {
           firstName: fields.firstNameField,
           secondName: fields.secondNameField,
-          email: fields.loginField,
+          email: fields.emailField,
           password: fields.passwordField
         }
       })
