@@ -38,8 +38,13 @@ color: #6879BB;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    padding: 36px 24px;
 }
 
-.infoBlock {
+.infoColumn {
     width: 260px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

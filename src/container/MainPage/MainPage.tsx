@@ -28,6 +28,7 @@ type MainPageProps = IMainPageProps;
   if (error) {
     return <p>Ошибка: {error.message}</p>;
   }
+  console.log(data);
    
    
   
