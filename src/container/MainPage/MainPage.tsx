@@ -18,24 +18,21 @@ type MainPageProps = IMainPageProps;
 
   const { loading, data, error } = useQuery<TProcessListData>(
     processListQuery,
-    {
-      fetchPolicy: "network-only"
-    }
-   );
+    { fetchPolicy: "network-only" }
+  );
    
-   if (loading) {
+  if (loading) {
     return <p>...загрузка</p>;
-    }
+  }
 
-    if (error) {
+  if (error) {
     return <p>Ошибка: {error.message}</p>;
-   }
+  }
    
-   console.log(data);
    
   
   return (
-    <div >
+    <div className={styles.mainPage} >
       <div className={styles.background}/>
       {map(data?.processList, process => (
         <Process key={process.id} process={process}/>
@@ -46,6 +43,6 @@ type MainPageProps = IMainPageProps;
 };
 
 
-/*const connected;*/
-
 export default MainPage;
+
+

@@ -9,6 +9,8 @@
 
 .processHeader {
     padding: 12px 24px;
+    border-bottom: 1px solid #D6DCE9;
+
 }
 
 .processName {
@@ -28,7 +30,16 @@ color: #6879BB;
     line-height: 16px;
     top: 24px;
     right: 22px;
-    
     opacity: 0.5;
     color: #6879BB;
+}
+
+.processInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.infoBlock {
+    width: 260px;
 }

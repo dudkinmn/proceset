@@ -1,8 +1,10 @@
 import React, { ReactElement} from "react";
+import { useDispatch } from 'react-redux';
 
-import styles from "./Menu.module.css";
 import history from '../../utils/history'
+import { actionAuthorize } from '../../store/index.reducer'
 import { IconMenuLight, ProductName, IconUser, IconMain, IconQuit } from '../../img/icons'
+import styles from "./Menu.module.css";
 
 export interface IMenuProps {
   setMenuVisible: any
@@ -12,9 +14,15 @@ type MenuProps = IMenuProps;
 
 let Menu = ({  setMenuVisible}: MenuProps): ReactElement<MenuProps> => {
   
+  const dispatch = useDispatch();
+  
+  const logOut = () => {
+    dispatch(actionAuthorize(false))
+    history.push('/');
+  }
+  
   return (
     <div className={styles.menu}>
-      
       <div className={styles.panelLeft}>
         <div onClick={() => {setMenuVisible(false)}} className={styles.btn + " " +  styles.btnMenu}>
             <div className={styles.btnMenuIcon}><IconMenuLight /></div>
@@ -28,22 +36,14 @@ let Menu = ({  setMenuVisible}: MenuProps): ReactElement<MenuProps> => {
             <div className={styles.btnMenuIcon}><IconMain /></div>
             <div className={styles.btnMenuTextOth}>Список процессов</div>
         </div>
-        <div onClick={() => {
-                      history.push('/');
-                      localStorage.setItem('token', "" );}} 
-             className={styles.btn}>
+        <div onClick={logOut} className={styles.btn}>
             <div className={styles.btnMenuIcon}><IconQuit /></div>
             <div className={styles.btnMenuTextOth}>Выход из системы</div>
         </div>
-
-
-  
       </div>
       <div onClick={() => {setMenuVisible(false)}} className={styles.background}/>
     </div>
-
   );
 };
-
 
 export default Menu;

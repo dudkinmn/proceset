@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
 import { reduxForm, SubmissionError } from "redux-form";
+import { useDispatch } from 'react-redux';
 
 import {
   IRegisterProps,
@@ -13,6 +14,7 @@ import {
   TSignupData,
   TSignupResponceData
 } from "./RegisterForm.types";
+import { actionAuthorize } from '../../store/index.reducer'
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 import signupMutation from "../../queries/signupMutation";
 import history from '../../utils/history'
@@ -28,9 +30,9 @@ const emailValidator = onlyEmail();
 const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState> => {
   
   const [signup] = useMutation<{}, TSignupData>(signupMutation);
+  const dispatch = useDispatch();
 
   const handleSubmit = (fields: any) => {
-
     return new Promise((resolve, reject) => {
       signup({
         variables: {
@@ -42,27 +44,18 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
       })
         .then((res: TSignupResponceData) => {
           console.log(res);
-          localStorage.setItem('token', res.data?.signup ? res.data.signup : "" );
-          history.push('/profile');
-          /**
-           * token ложим куда нужно
-           * и редиректим history.push
-           * res.data?.token;
-           * res.data?.user;
-           */
-
+          localStorage.setItem('token', res.data?.signup ? res.data.signup : "");
+          dispatch(actionAuthorize(true))
+          history.push('/main');
           resolve(res);
         })
         .catch(e => {
-          console.log(e?.message);
           reject(new SubmissionError({ _error: e?.message }));
         });
     });
   }
 
-
   return (
-    
       <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
         <div className={styles.formContent}>
               <p className={styles.headReg}>Регистрация</p>
@@ -73,15 +66,11 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
               <InputField name='repeatpasswordField' type="password" placeholder="Повторите пароль" validate={[passwordValidator]}/>
               <Button isLogin={true} buttonText='Применить и войти' />
               <p>Уже зарегистрированы?
-                      <MyLink to='/login' linkText='Вход'/>
+                  <MyLink to='/login' linkText='Вход'/>
               </p>
-              
           </div>
-
           {props.error ? <ErrorLogin /> : <></>}
-
        </form>
-    
   );
 };
 

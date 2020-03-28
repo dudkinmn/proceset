@@ -2,7 +2,7 @@ import React,  { ReactElement } from "react";
 import { reduxForm, SubmissionError } from "redux-form";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
 import { useMutation } from "@apollo/react-hooks";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   IProfileProps,
@@ -11,32 +11,23 @@ import {
   TProfileFormData,
   IProfile,
   IProfileVariables,
-  TProfileData,
-
   TEditUserData,
   TEditUserResponceData
 } from "./ProfileForm.types";
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
-
-
 import editUserMutation from "../../queries/editUserMutation";
-import styles from "./ProfileForm.module.css";
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
+import styles from "./ProfileForm.module.css";
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
-
-
 const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> => {
 
-  
-  console.log(props);
   const [editUser] = useMutation<{}, TEditUserData>(editUserMutation);
 
   const handleSubmit = (fields: any) => {
-
     return new Promise((resolve, reject) => {
       editUser({
         variables: {
@@ -48,18 +39,16 @@ const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> =
         }
       })
         .then((res: TEditUserResponceData) => {
-          console.log(res);
           resolve(res);
         })
         .catch(e => {
-          console.log(e?.message);
           reject(new SubmissionError({ _error: e?.message }));
         });
     });
   }
   
   return ( 
-    <form onSubmit={props.handleSubmit(handleSubmit)}>
+    <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.profileForm}>
       <div className={styles.background}/>
 
       <div className={styles.userHeader}>
@@ -75,55 +64,9 @@ const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> =
         <InputField name='repeatpasswordField' type='password' placeholder='********' withLabel={true} textLabel='Повторите пароль' validate={[passwordValidator]} />
       </div>
     </form>
-    
   );
 };
 
-
-
-/*const connectedToReduxForm = reduxForm<
-  TProfileFormData,
-  TProfileOwnProps & TProfileStateProps & TProfileDispatchProps
->({
-  form: "profileForm",
-  validate: formProfileValidator
-});
-
-const mapStateToProps: MapStateToProps<TProfileStateProps, TProfileOwnProps> = (
-  state: any,
-  ownProps: TProfileOwnProps
-) => {
-  return {
-    count: state?.count,
-    initialValues: {
-      nameField: 'nameField',
-      surnameField: 'surnameField'
-    }
-  };
-};
-
-const mapDispatchToProps: MapDispatchToProps<
-  TProfileDispatchProps,
-  TProfileOwnProps
-> = (dispatch: Dispatch, ownProps: TProfileOwnProps) => {
-  return {
-    onIncrement() {
-      dispatch(incAction());
-    }
-  };
-};
-
-
-const ConnectedProfile = connect<
-  TProfileStateProps,
-  TProfileDispatchProps,
-  TProfileOwnProps
->(
-  mapStateToProps,
-  mapDispatchToProps
-)(connectedToReduxForm(ProfileForm));
-
-export default ConnectedProfile;*/
 
 const connectedToReduxForm = reduxForm<
   TProfileFormData,

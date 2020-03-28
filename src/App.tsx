@@ -1,59 +1,44 @@
-import React from "react";
-import { Switch, Route, Redirect} from "react-router-dom";
-import { isEmpty } from "lodash";
-
+import React, { useEffect} from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import "./index.css";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { TStore } from './store/index.store'
 import Authorized from "./layouts/Authorized/Authorized";
 import UnAuthorized from "./layouts/UnAuthorized/UnAuthorized";
 
+
 export interface IAppProps {}
 
-// client.query({
-//   query: gql`
-//     query {
-//       processList {
-//         id
-//         name
-//       }
-//     }
-//   `
-// });
-
 function App({ ...props }: IAppProps): React.ReactElement<any> {
-
-   //статус авторизации
   
-  let isAuthorized = isEmpty(localStorage.getItem("token")) ? false : true ;  
+  let isAuthorized = useSelector((state: TStore) => (state.isAuthorized));
 
   const pages = {
     main: () => <Authorized needPage={"main"} />,
     profile: () => <Authorized needPage={"profile"} />,
-    login: () => <UnAuthorized isRegister={false} />,
+    login:() => <UnAuthorized isRegister={false} />,
     register: () => <UnAuthorized isRegister={true} />,
     notFound: () => <div>404. Страница не найдена</div>,
   };
 
   return (
-    <> 
-      {isAuthorized = isEmpty(localStorage.getItem("token")) ? false : true}
+    <>
       <Switch>
-         
+        {console.log('isAuthorized=', isAuthorized)}
         <Route exact path="/" component={pages.login} />
         <Route path="/register" component={pages.register} />
         <Route path="/login" component={pages.login} />
 
-        {isAuthorized ?
+        { isAuthorized  ?
           <Route path='/profile' component={pages.profile} />:
           <Redirect to="/login" />}
-        
-        {isAuthorized ?
+          
+        { isAuthorized  ?
           <Route path='/main' component={pages.main} /> :
           <Redirect to="/login" />}
-        
-      </Switch>
-    </>
+        </Switch>
+      </>
   );
 }
 

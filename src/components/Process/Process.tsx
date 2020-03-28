@@ -19,11 +19,11 @@ let Process = ({ process }: TProcessProps): ReactElement => {
           <label className={styles.processName}>{process.name}</label>
           <label className={styles.linkToMap}>На карту процесса<Icon.ArrowRight/></label>
         </div>
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className={styles.processInfo}>
+            <div className={styles.infoBlock}>werasdasdasdwer</div>
+            <div className={styles.infoBlock}>werwer</div>
+            <div className={styles.infoBlock}> werw</div>
+            <div className={styles.infoBlock}>werwer</div>
         </div>
     </div>
   );

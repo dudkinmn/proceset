@@ -1,3 +1,11 @@
+.mainPage {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 100%;
+}
+
+
 .background {
     background: #EBF2FB;
     height: 100%;

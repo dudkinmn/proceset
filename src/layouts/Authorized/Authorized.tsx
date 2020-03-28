@@ -10,6 +10,7 @@ import Header from '../../components/Header/Header'
 import ProfileForm from '../../container/ProfileForm/ProfileForm'
 import MainPage from '../../container/MainPage/MainPage'
 import Menu from '../../components/Menu/Menu'
+import styles from './Authorized.module.css'
 
 import getCurrentUserQuery from "../../queries/getCurrentUserQuery";
 
@@ -58,13 +59,18 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
 
     return (
-        <>  
+        <div className={styles.body}>  
             {menuVisible ? <Menu setMenuVisible={setMenuVisible} /> : null}
-            {<Header setMenuVisible={setMenuVisible}/>}
+            <Header setMenuVisible={setMenuVisible}/>
             {renderSwitch()}
-        </>
+        </div>
     )
 
 }
 
 export default Authorized
+
+
+
+
+
