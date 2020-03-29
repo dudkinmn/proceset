@@ -5,6 +5,17 @@
     width: 100%;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    background: #AFB9D7;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8B99C9;
+    border-radius: 20px;
+    height: 266px;
+}
 
 .background {
     background: #EBF2FB;

@@ -21,7 +21,7 @@ import history from '../../utils/history'
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink';
-import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
+import ErrorServer from '../../components/ErrorServer/ErrorServer';
 import styles from "./LoginForm.module.css";
 
 const passwordValidator = passLength(8);
@@ -29,6 +29,7 @@ const emailValidator = onlyEmail();
 
 const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
 
+  console.log(props);
   const [signin] = useMutation<{}, TSigninData>( signinMutation );
   const dispatch = useDispatch();
 
@@ -53,6 +54,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
     });
   }
   
+
   return (
     <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
       <div className={styles.formContent}>
@@ -61,7 +63,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
         <Button isLogin={true} buttonText='Войти в систему' />
         <MyLink to='/register' linkText='Зарегистрироваться' />
       </div>
-      {props.error ? <ErrorLogin /> : <></>}
+      {props.error ? <ErrorServer errorText={props.error} /> : null}
     </form>
   );
 };
@@ -74,9 +76,12 @@ const connectedToReduxForm = reduxForm<
   validate: formLoginValidator
 });
 
+
 export default withMutation<
   TLoginOwnProps,
   ILogin,
   ILoginVariables,
   TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
 >(signinMutation)(connectedToReduxForm(LoginForm));
+
+

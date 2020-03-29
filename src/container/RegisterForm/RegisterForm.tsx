@@ -21,7 +21,7 @@ import history from '../../utils/history'
 import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import MyLink from '../../components/MyLink/MyLink'
-import ErrorLogin from '../../components/ErrorLogin/ErrorLogin';
+import ErrorServer from '../../components/ErrorServer/ErrorServer';
 import styles from "./RegisterForm.module.css";
 
 const passwordValidator = passLength(8);
@@ -69,7 +69,7 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
                   <MyLink to='/login' linkText='Вход'/>
               </p>
           </div>
-          {props.error ? <ErrorLogin /> : <></>}
+          {props.error ? <ErrorServer errorText={props.error} /> : <></>}
        </form>
   );
 };

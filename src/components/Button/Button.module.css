@@ -36,6 +36,10 @@ button:hover {
     background: #FFD73B;
 }
 
+button:hover:disabled {
+    background:  #FFCE0C;
+}
+
 button:active {
     background: #FFC40C;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.12);
