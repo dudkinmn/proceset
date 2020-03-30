@@ -23,9 +23,7 @@ function App({ ...props }: IAppProps): React.ReactElement<any> {
   };
 
   return (
-    <>
       <Switch>
-        {console.log('isAuthorized=', isAuthorized)}
         <Route exact path="/" component={pages.login} />
         <Route path="/register" component={pages.register} />
         <Route path="/login" component={pages.login} />
@@ -38,7 +36,6 @@ function App({ ...props }: IAppProps): React.ReactElement<any> {
           <Route path='/main' component={pages.main} /> :
           <Redirect to="/login" />}
         </Switch>
-      </>
   );
 }
 
