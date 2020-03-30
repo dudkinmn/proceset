@@ -14,7 +14,7 @@ import {
   TSigninData,
   TSigninResponceData
 } from "./LoginForm.types";
-import { actionAuthorize } from '../../store/index.reducer'
+import { actionAuthorize, actionSetUser } from '../../store/index.reducer'
 import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
 import signinMutation from "../../queries/signinMutation";
 import history from '../../utils/history'
@@ -24,13 +24,16 @@ import MyLink from '../../components/MyLink/MyLink';
 import ErrorServer from '../../components/ErrorServer/ErrorServer';
 import styles from "./LoginForm.module.css";
 
+import { useSelector } from 'react-redux';
+import { TStore } from '../../store/index.store'
+
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
 const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
 
-  console.log(props);
-  const [signin] = useMutation<{}, TSigninData>( signinMutation );
+  const [signin] = useMutation<{}, TSigninData>(signinMutation);
+  let currentUser = useSelector((state: TStore) => (state.currentUser));
   const dispatch = useDispatch();
 
   const handleSubmit = (fields: any) => {
@@ -44,6 +47,8 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
         .then((res: TSigninResponceData) => {
           localStorage.setItem('token', res.data?.login?.token ? res.data.login.token : "");
           dispatch(actionAuthorize(true))
+          
+          dispatch(actionSetUser(res.data?.login?.user))
           sessionStorage.setItem("isAuthorized", "true")
           history.push('/main');
           resolve(res);
@@ -53,6 +58,9 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
         });
     });
   }
+
+
+
   
 
   return (

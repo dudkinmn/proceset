@@ -34,7 +34,7 @@ let Authorized = ({ needPage }: AuthorizedProps):ReactElement<AuthorizedProps> =
 
     if (loading) {
         return <p>...загрузка</p>;
-      }
+    }
     
     if (error) {
       return <p>Ошибка: {error.message}</p>;

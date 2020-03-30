@@ -54,7 +54,7 @@ export type TSigninData = {
 
 export type TSigninResponceData = { 
   data?: {
-    login ?: {
+    login?: {
       token?: string;
       user?: {
         id: number;
