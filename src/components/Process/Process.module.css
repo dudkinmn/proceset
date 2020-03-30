@@ -1,14 +1,14 @@
 .process {
     position: relative;
     min-width: calc(260px*4);
-    margin: 6px 22px; 
+    margin: 12px 22px; 
     background: #FFFFFF;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
 }
 
 .processHeader {
-    padding: 12px 24px;
+    padding: 11px 24px;
     border-bottom: 1px solid #D6DCE9;
 }
 
@@ -38,11 +38,19 @@
 }
 
 .infoColumn {
-    min-width: 260px;
+    min-width: 261px;
     height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+}
+
+
+.infoBlockFirst {
+    position: relative;
+    top: 29px;
+}
+
+.infoBlockSecondToFifth {
+    position: relative;
+    margin-bottom: 23px;
 }
 
 .infoBlock {
@@ -54,13 +62,13 @@
     font-size: 24px;
     line-height: 30px;
     color: #535374;
-    margin: 0px 0px 0px 12px;
+    margin-left: 12px;
 }
 
 .footnote {
     font-size: 12px;
     line-height: 24px;
-    margin: 0px 0px 0px 36px;
+    margin-left: 36px;
     color: #999999;
 }
 
@@ -75,14 +83,14 @@
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
-    margin: 0px 0px 0px 12px;
+    margin-left: 12px;
     color: #535374;
 }
 
 .infoTime {
     font-size: 12px;
     line-height: 24px;
-    margin: 3px 0px;;
+    margin: 3px 0px 12px 0px;
 }
 
 .noteTime {

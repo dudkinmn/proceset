@@ -23,7 +23,7 @@ let Process = ({ process }: TProcessProps): ReactElement => {
         </div>
         <div className={styles.processInfo}>
           <div className={styles.infoColumn}>
-            <div className={styles.infoBlock}>
+            <div className={styles.infoBlockFirst}>
               <div className={styles.infoBlockMainData}>  
                 <Icon.CountRepeat />
                 <span className={styles.dataNumberOfExecutions}>{process.numberOfExecutions}</span>
@@ -32,14 +32,14 @@ let Process = ({ process }: TProcessProps): ReactElement => {
             </div>
           </div>
           <div className={styles.infoColumn}>
-            <div className={styles.infoBlock}>
+            <div className={styles.infoBlockSecondToFifth}>
               <div className={styles.infoBlockMainData}>  
                 <Icon.AverageTimeWork />
                 <span className={styles.dataOth}>{getHHMM(process.averageLeadTime)}</span>
               </div>
               <p className={styles.footnote}>среднее время выполнения</p>
             </div>
-            <div className={styles.infoBlock}>
+            <div className={styles.infoBlockSecondToFifth}>
               <div className={styles.infoBlockMainData}>  
                 <Icon.AverageActiveTime />
                 <span className={styles.dataOth}>{getHHMM(process.averageActiveTime) + getPercent(process.averageLeadTime, process.averageActiveTime)}</span>
@@ -48,14 +48,14 @@ let Process = ({ process }: TProcessProps): ReactElement => {
               </div>
             </div>
           <div className={styles.infoColumn}>
-            <div className={styles.infoBlock}>
+            <div className={styles.infoBlockSecondToFifth}>
               <div className={styles.infoBlockMainData}>  
                 <Icon.CountWorker />
                 <span className={styles.dataOth}>{getNumberWithText(process.employeesInvolvedProcess, "сотрудник")}</span>
               </div>
               <p className={styles.footnote}>участвует в процессе</p>
             </div>
-            <div className={styles.infoBlock}>
+            <div className={styles.infoBlockSecondToFifth}>
               <div className={styles.infoBlockMainData}>  
                 <Icon.CountScenaries />
                 <span className={styles.dataOth}>{getNumberWithText(process.numberOfScenarios, "сценарий")}</span>

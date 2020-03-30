@@ -13,7 +13,6 @@ export interface ITextFieldProps extends Partial<WrappedFieldProps>  {
     withLabel?: boolean;
     textLabel?: string;
     classNames?: string[]
-
 }
 
 type TextFieldProps = ITextFieldProps;
@@ -65,6 +64,3 @@ const InputField: React.FC<ITextFieldProps & BaseFieldProps> = props => {
 };
 
 export default InputField;
-
-
-/*export default TextField;*/
