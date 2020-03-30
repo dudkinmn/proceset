@@ -1,9 +1,8 @@
 .passwordFieldIconStyle {
     fill: #6879BB;
     position: absolute;
-    right: 39px;
-    top: -9px;
-    padding: 12px 0px;
+    right: 12px;
+    top: 3px;
     cursor: pointer;
   };
 

@@ -65,7 +65,7 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
               <InputField name='passwordField' type="password" placeholder="Введите пароль" validate={[passwordValidator]}/>
               <InputField name='repeatpasswordField' type="password" placeholder="Повторите пароль" validate={[passwordValidator]}/>
               <Button isLogin={true} buttonText='Применить и войти' />
-              <p>Уже зарегистрированы?
+              <p className={styles.preLinkText}>{"Уже зарегистрированы? "}
                   <MyLink to='/login' linkText='Вход'/>
               </p>
           </div>

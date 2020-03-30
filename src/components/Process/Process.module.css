@@ -1,6 +1,6 @@
 .process {
-    width: calc(100% - 44px);
     position: relative;
+    min-width: calc(260px*4);
     margin: 6px 22px; 
     background: #FFFFFF;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -10,21 +10,17 @@
 .processHeader {
     padding: 12px 24px;
     border-bottom: 1px solid #D6DCE9;
-
 }
 
 .processName {
-    font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 36px;
-
-color: #6879BB;
+    color: #6879BB;
 }
 
 .linkToMap {
     position: absolute;
-    font-style: normal;
     font-weight: bold;
     font-size: 12px;
     line-height: 16px;
@@ -42,9 +38,60 @@ color: #6879BB;
 }
 
 .infoColumn {
-    width: 260px;
+    min-width: 260px;
     height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
+.infoBlock {
+    margin: 6px 0px;
+}
+
+.dataNumberOfExecutions {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    color: #535374;
+    margin: 0px 0px 0px 12px;
+}
+
+.footnote {
+    font-size: 12px;
+    line-height: 24px;
+    margin: 0px 0px 0px 36px;
+    color: #999999;
+}
+
+.infoBlockMainData {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dataOth {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    margin: 0px 0px 0px 12px;
+    color: #535374;
+}
+
+.infoTime {
+    font-size: 12px;
+    line-height: 24px;
+    margin: 3px 0px;;
+}
+
+.noteTime {
+    color: #999999;
+    display: inline-block;
+    width: 67px;
+}
+
+.dataTime {
+    margin-left: 20px;
+}
+

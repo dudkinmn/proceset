@@ -16,7 +16,7 @@
 }
 
 .formContent {
-    padding: 34px 48px 24px 48px ;
+    padding: 36px 48px 24px 48px ;
 }
 
 .headReg {
@@ -26,8 +26,13 @@
     line-height: 24px;
     display:flex;
     align-items: center;
-
     color: #404064;
-    margin-bottom: 22px;
-
+    margin-bottom: 20px;
 }
+
+.preLinkText {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 19px;
+}
+

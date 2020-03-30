@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { Field, WrappedFieldProps, BaseFieldProps } from "redux-form";
 import { isString } from 'lodash'
 
-import { Eye } from "../../img/Eye";
+import { Eye } from "../Eye/Eye";
 import styles from "./TextField.module.css";
 
 
@@ -43,7 +43,7 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFi
   }
   
   return (
-    <div className={styles.inputBlock} >
+    <div className={styles.inputBlock}>
       {withLabel && <label>{textLabel}</label>}
       <input
         className={withLabel ? styles.inputWithLabel : styles.inputWithoutLabel}

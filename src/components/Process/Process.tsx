@@ -24,47 +24,57 @@ let Process = ({ process }: TProcessProps): ReactElement => {
         <div className={styles.processInfo}>
           <div className={styles.infoColumn}>
             <div className={styles.infoBlock}>
-              <Icon.CountRepeat />
-              <span>{process.numberOfExecutions}</span>
-              <p>выполнено раз</p>
+              <div className={styles.infoBlockMainData}>  
+                <Icon.CountRepeat />
+                <span className={styles.dataNumberOfExecutions}>{process.numberOfExecutions}</span>
+              </div>
+              <p className={styles.footnote}>выполнено раз</p>
             </div>
           </div>
           <div className={styles.infoColumn}>
             <div className={styles.infoBlock}>
-              <Icon.AverageTimeWork />
-              <span>{getHHMM(process.averageLeadTime)}</span>
-              <p>среднее время выполнения</p>
+              <div className={styles.infoBlockMainData}>  
+                <Icon.AverageTimeWork />
+                <span className={styles.dataOth}>{getHHMM(process.averageLeadTime)}</span>
+              </div>
+              <p className={styles.footnote}>среднее время выполнения</p>
             </div>
             <div className={styles.infoBlock}>
-              <Icon.AverageActiveTime />
-              <span>{getHHMM(process.averageActiveTime) + getPercent(process.averageLeadTime, process.averageActiveTime)}</span>
-              <p>среднее активное время</p>
+              <div className={styles.infoBlockMainData}>  
+                <Icon.AverageActiveTime />
+                <span className={styles.dataOth}>{getHHMM(process.averageActiveTime) + getPercent(process.averageLeadTime, process.averageActiveTime)}</span>
+                </div>
+              <p className={styles.footnote}>среднее активное время</p>
+              </div>
+            </div>
+          <div className={styles.infoColumn}>
+            <div className={styles.infoBlock}>
+              <div className={styles.infoBlockMainData}>  
+                <Icon.CountWorker />
+                <span className={styles.dataOth}>{getNumberWithText(process.employeesInvolvedProcess, "сотрудник")}</span>
+              </div>
+              <p className={styles.footnote}>участвует в процессе</p>
+            </div>
+            <div className={styles.infoBlock}>
+              <div className={styles.infoBlockMainData}>  
+                <Icon.CountScenaries />
+                <span className={styles.dataOth}>{getNumberWithText(process.numberOfScenarios, "сценарий")}</span>
+              </div>
+              <p className={styles.footnote}>в процессе</p>
             </div>
           </div>
           <div className={styles.infoColumn}>
-          <div className={styles.infoBlock}>
-              <Icon.CountWorker />
-              <span>{getNumberWithText(process.employeesInvolvedProcess, "сотрудник")}</span>
-              <p>участвует в процессе</p>
+            <div className={styles.infoTime}>
+              <span className={styles.noteTime}>Начало</span>
+              <span className={styles.dataTime}>{getDDMMYYYY(process.start)}</span>
             </div>
-            <div className={styles.infoBlock}>
-              <Icon.CountScenaries />
-              <span>{getNumberWithText(process.numberOfScenarios, "сценарий")}</span>
-              <p>в процессе</p>
+            <div className={styles.infoTime}>
+              <span className={styles.noteTime}>Окончание</span>
+              <span className={styles.dataTime}>{getDDMMYYYY(process.end)}</span>
             </div>
-          </div>
-          <div className={styles.infoColumn}>
-            <div>
-              <span>Начало</span>
-              <span>{getDDMMYYYY(process.start)}</span>
-            </div>
-            <div>
-              <span>Окончание</span>
-              <span>{getDDMMYYYY(process.end)}</span>
-            </div>
-            <div>
-              <span>Загрузка</span>
-              <span>{getDDMMYYYY(process.loading)}</span>
+            <div className={styles.infoTime}>
+              <span className={styles.noteTime}>Загрузка</span>
+              <span className={styles.dataTime}>{getDDMMYYYY(process.loading)}</span>
             </div>
           </div>
         </div>
