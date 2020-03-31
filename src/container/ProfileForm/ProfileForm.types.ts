@@ -1,5 +1,6 @@
 import { InjectedFormProps } from "redux-form";
 import { MutateProps } from "@apollo/react-hoc";
+import { TGetUserData } from '../../store/index.reducer'
 
 export type TProfileStateProps = {
 };
@@ -16,15 +17,15 @@ export type TProfileOwnProps = {
 };
 
 export type TProfileFormData = {
-    firstNameField?: string;
-    secondNameField?: string;
+  firstNameField?: string;
+  secondNameField?: string;
   emailField?: string;
 };
 
 export interface IProfileProps
   extends InjectedFormProps<
       TProfileFormData,
-      TProfileOwnProps /*& TProfileDispatchProps & TProfileStateProps*/ & MutateProps<IProfile, IProfileVariables>
+      TProfileOwnProps & MutateProps<IProfile, IProfileVariables>
     >,
   TProfileStateProps,
   TProfileOwnProps,
@@ -62,12 +63,11 @@ export type TProfileData = {
 
 export type TEditUserResponceData = { 
   data?: {
-    id?: number;
-    firstName?: string;
-    secondName?: string;
-    email?: string;
-  }
+    editUser?: TGetUserData
+  } 
 };
+
+
 
 export type TEditUserData = { 
   id: number;

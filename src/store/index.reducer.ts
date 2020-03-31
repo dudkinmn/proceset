@@ -5,13 +5,15 @@ export type TAction = {
   payload?: any;
 };
 
-export type TGetUserData = {
+export type TGetUserData =
+  {
       id: number;
       firstName: string;
       secondName: string;
       email: string;
-  } | undefined
-
+    }
+  | undefined
+  | {};
 
 const SET_AUTHORIZED = "SET_AUTHORIZED";
 const SET_USER = "SET_USER";
@@ -24,17 +26,13 @@ export const actionAuthorize = (payload: boolean) => {
 };
 
 export const actionSetUser = (payload: TGetUserData) => {
-  
   return {
     type: SET_USER,
     payload: payload
   };
 };
 
-export const authorizeReducer = (
-  state: boolean = initialStateAuthorized,
-  action: TAction
-) => {
+export const authorizeReducer = (state: boolean = false, action: TAction) => {
   switch (action.type) {
     case SET_AUTHORIZED:
       return action.payload;
@@ -44,23 +42,20 @@ export const authorizeReducer = (
 };
 
 export const setUserReducer = (
-  state: TGetUserData = currentUser,
+  state: TGetUserData = initCurrentUser,
   action: TAction
 ) => {
   switch (action.type) {
     case SET_USER:
-      return action.payload;
+      return action.payload ? action.payload : initCurrentUser;
     default:
       return state;
   }
 };
 
-
-
-const initialStateAuthorized = sessionStorage.getItem("isAuthorized") === "true";
-export const currentUser = {
-    id: 0,
-    firstName: "",
-    secondName: "",
-    email: ""
-  }
+const initCurrentUser = {
+  id: 0,
+  firstName: "",
+  secondName: "",
+  email: ""
+};

@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { reduxForm, SubmissionError } from "redux-form";
 import { useMutation } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 import {
   ILoginProps,
@@ -14,26 +14,26 @@ import {
   TSigninData,
   TSigninResponceData
 } from "./LoginForm.types";
-import { actionAuthorize, actionSetUser } from '../../store/index.reducer'
-import { formLoginValidator, onlyEmail, passLength } from "../../utils/validators";
+import { actionAuthorize, actionSetUser } from "../../store/index.reducer";
+import {
+  formLoginValidator,
+  onlyEmail,
+  passLength
+} from "../../utils/validators";
 import signinMutation from "../../queries/signinMutation";
-import history from '../../utils/history'
-import InputField from '../../components/TextField/TextField';
-import Button from '../../components/Button/Button';
-import MyLink from '../../components/MyLink/MyLink';
-import ErrorServer from '../../components/ErrorServer/ErrorServer';
+import history from "../../utils/history";
+import InputField from "../../components/TextField/TextField";
+import Button from "../../components/Button/Button";
+import MyLink from "../../components/MyLink/MyLink";
+import ErrorServer from "../../components/ErrorServer/ErrorServer";
 import styles from "./LoginForm.module.css";
-
-import { useSelector } from 'react-redux';
-import { TStore } from '../../store/index.store'
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
 const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
-
   const [signin] = useMutation<{}, TSigninData>(signinMutation);
-  let currentUser = useSelector((state: TStore) => (state.currentUser));
+
   const dispatch = useDispatch();
 
   const handleSubmit = (fields: any) => {
@@ -45,31 +45,41 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
         }
       })
         .then((res: TSigninResponceData) => {
-          localStorage.setItem('token', res.data?.login?.token ? res.data.login.token : "");
-          dispatch(actionAuthorize(true))
-          
-          dispatch(actionSetUser(res.data?.login?.user))
-          sessionStorage.setItem("isAuthorized", "true")
-          history.push('/main');
+          localStorage.setItem(
+            "token",
+            res.data?.login?.token ? res.data.login.token : ""
+          );
+          dispatch(actionAuthorize(true));
+          dispatch(actionSetUser(res.data?.login?.user));
+          history.push("/main");
           resolve(res);
         })
         .catch(e => {
           reject(new SubmissionError({ _error: e?.message }));
         });
     });
-  }
-
-
-
-  
+  };
 
   return (
-    <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
+    <form
+      onSubmit={props.handleSubmit(handleSubmit)}
+      className={styles.formLayout}
+    >
       <div className={styles.formContent}>
-        <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]} />
-        <InputField name='passwordField' type="password" placeholder="Пароль" validate={[passwordValidator]} />
-        <Button isLogin={true} buttonText='Войти в систему' />
-        <MyLink to='/register' linkText='Зарегистрироваться' />
+        <InputField
+          name="emailField"
+          type="email"
+          placeholder="Электронная почта"
+          validate={[emailValidator]}
+        />
+        <InputField
+          name="passwordField"
+          type="password"
+          placeholder="Пароль"
+          validate={[passwordValidator]}
+        />
+        <Button isLogin={true} buttonText="Войти в систему" />
+        <MyLink to="/register" linkText="Зарегистрироваться" />
       </div>
       {props.error ? <ErrorServer errorText={props.error} /> : null}
     </form>
@@ -84,12 +94,9 @@ const connectedToReduxForm = reduxForm<
   validate: formLoginValidator
 });
 
-
 export default withMutation<
   TLoginOwnProps,
   ILogin,
   ILoginVariables,
   TLoginOwnProps & MutateProps<ILogin, ILoginVariables>
 >(signinMutation)(connectedToReduxForm(LoginForm));
-
-

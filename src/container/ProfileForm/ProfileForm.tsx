@@ -20,18 +20,24 @@ import InputField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import styles from "./ProfileForm.module.css";
 
+import { actionAuthorize, actionSetUser } from '../../store/index.reducer'
+import { TStore } from '../../store/index.store'
+
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
 const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> => {
 
   const [editUser] = useMutation<{}, TEditUserData>(editUserMutation);
+  const currentUser = useSelector((state: TStore) => (state.currentUser));
+  const dispatch = useDispatch();
 
   const handleSubmit = (fields: any) => {
     return new Promise((resolve, reject) => {
       editUser({
         variables: {
-          id: Number(localStorage.getItem('Id')),
+        /*id: Number(localStorage.getItem('Id')),*/
+          id: currentUser.id,
           firstName: fields.firstNameField,
           secondName: fields.secondNameField,
           email: fields.emailField,
@@ -39,6 +45,7 @@ const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> =
         }
       })
         .then((res: TEditUserResponceData) => {
+          dispatch(actionSetUser(res.data?.editUser))
           resolve(res);
         })
         .catch(e => {
@@ -46,13 +53,16 @@ const ProfileForm = ({ ...props }: IProfileProps): ReactElement<IProfileState> =
         });
     });
   }
+
+  
+
   
   return ( 
     <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.profileForm}>
       <div className={styles.background}/>
 
       <div className={styles.userHeader}>
-        <h1 className={styles.userName}>{props.initialValues.firstNameField + " " + props.initialValues.secondNameField}. Редактирование</h1>
+        <h1 className={styles.userName}>{currentUser.firstName + " " + currentUser.secondName}. Редактирование</h1>
         <Button isLogin={false} disabled={ !(props.dirty && props.anyTouched)} buttonText='Сохранить' />
       </div>
       
