@@ -10,6 +10,6 @@ export default gql`
         firstName: $firstName,
         secondName: $secondName,
         email: $email, 
-        password: $password) 
+        password: $password)
   }
 `;

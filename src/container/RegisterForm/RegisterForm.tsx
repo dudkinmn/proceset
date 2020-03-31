@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import React, { ReactElement, useEffect } from "react";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
 import { reduxForm, SubmissionError } from "redux-form";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 import {
   IRegisterProps,
@@ -14,23 +14,37 @@ import {
   TSignupData,
   TSignupResponceData
 } from "./RegisterForm.types";
-import { actionAuthorize } from '../../store/index.reducer'
+import { actionSetUser } from "../../store/index.reducer";
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 import signupMutation from "../../queries/signupMutation";
-import history from '../../utils/history'
-import InputField from '../../components/TextField/TextField';
-import Button from '../../components/Button/Button';
-import MyLink from '../../components/MyLink/MyLink'
-import ErrorServer from '../../components/ErrorServer/ErrorServer';
+import history from "../../utils/history";
+import InputField from "../../components/TextField/TextField";
+import Button from "../../components/Button/Button";
+import MyLink from "../../components/MyLink/MyLink";
+import ErrorServer from "../../components/ErrorServer/ErrorServer";
 import styles from "./RegisterForm.module.css";
+
+import { TGetUserResponceData } from "../../layouts/Authorized/Authorized.types";
+import getCurrentUserQuery from "../../queries/getCurrentUserQuery";
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
 
-const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState> => {
-  
+const RegisterForm = ({
+  ...props
+}: IRegisterProps): ReactElement<IRegisterState> => {
   const [signup] = useMutation<{}, TSignupData>(signupMutation);
   const dispatch = useDispatch();
+
+  const [loadGreeting, { called, loading, data }] = useLazyQuery<
+    TGetUserResponceData
+  >(getCurrentUserQuery, { fetchPolicy: "network-only" });
+
+  if (Object.values(data?.currentUser || {}).length > 0) {
+    console.log("data?.currentUser", data?.currentUser);
+    dispatch(actionSetUser(data?.currentUser));
+    history.push("/profile");
+  }
 
   const handleSubmit = (fields: any) => {
     return new Promise((resolve, reject) => {
@@ -43,34 +57,56 @@ const RegisterForm = ({ ...props }: IRegisterProps): ReactElement<IRegisterState
         }
       })
         .then((res: TSignupResponceData) => {
-          console.log(res);
-          localStorage.setItem('token', res.data?.signup ? res.data.signup : "");
-          dispatch(actionAuthorize(true))
-          history.push('/main');
+          console.log("res", res);
+          localStorage.setItem(
+            "token",
+            res.data?.signup ? res.data.signup : ""
+          );
+          loadGreeting(); //после регистрации принудительно запрашиваем текущего юзера,
+          //потому что бэк его не отдаёт его только при регистрации
           resolve(res);
         })
         .catch(e => {
           reject(new SubmissionError({ _error: e?.message }));
         });
     });
-  }
+  };
 
   return (
-      <form onSubmit={props.handleSubmit(handleSubmit)} className={styles.formLayout}>
-        <div className={styles.formContent}>
-              <p className={styles.headReg}>Регистрация</p>
-              <InputField name='firstNameField' type="text" placeholder="Имя"/>
-              <InputField name='secondNameField' type="text" placeholder="Фамилия" />
-              <InputField name='emailField' type="email" placeholder="Электронная почта" validate={[emailValidator]}/>
-              <InputField name='passwordField' type="password" placeholder="Введите пароль" validate={[passwordValidator]}/>
-              <InputField name='repeatpasswordField' type="password" placeholder="Повторите пароль" validate={[passwordValidator]}/>
-              <Button isLogin={true} buttonText='Применить и войти' />
-              <p className={styles.preLinkText}>{"Уже зарегистрированы? "}
-                  <MyLink to='/login' linkText='Вход'/>
-              </p>
-          </div>
-          {props.error ? <ErrorServer errorText={props.error} /> : <></>}
-       </form>
+    <form
+      onSubmit={props.handleSubmit(handleSubmit)}
+      className={styles.formLayout}
+    >
+      <div className={styles.formContent}>
+        <p className={styles.headReg}>Регистрация</p>
+        <InputField name="firstNameField" type="text" placeholder="Имя" />
+        <InputField name="secondNameField" type="text" placeholder="Фамилия" />
+        <InputField
+          name="emailField"
+          type="email"
+          placeholder="Электронная почта"
+          validate={[emailValidator]}
+        />
+        <InputField
+          name="passwordField"
+          type="password"
+          placeholder="Введите пароль"
+          validate={[passwordValidator]}
+        />
+        <InputField
+          name="repeatpasswordField"
+          type="password"
+          placeholder="Повторите пароль"
+          validate={[passwordValidator]}
+        />
+        <Button isLogin={true} buttonText="Применить и войти" />
+        <p className={styles.preLinkText}>
+          {"Уже зарегистрированы? "}
+          <MyLink to="/login" linkText="Вход" />
+        </p>
+      </div>
+      {props.error ? <ErrorServer errorText={props.error} /> : <></>}
+    </form>
   );
 };
 

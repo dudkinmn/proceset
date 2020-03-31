@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
@@ -12,32 +12,51 @@ import Preloader from "./components/Preloader/Preloader";
 import getCurrentUserQuery from "./queries/getCurrentUserQuery";
 
 import history from "./utils/history";
-import { actionAuthorize, actionSetUser } from "./store/index.reducer";
+import { actionSetUser } from "./store/index.reducer";
 import { TGetUserResponceData } from "./App.types";
 
 export interface IAppProps {}
 
 function App({ ...props }: IAppProps): React.ReactElement<any> {
-  const isAuthorized = useSelector((state: TStore) => state.isAuthorized);
+  const currentUser = useSelector((state: TStore) => state.currentUser);
+  const [isLoading, setIsLoading] = useState(false);
+  let isAuthorized = Object.values(currentUser).length > 0;
+
   const dispatch = useDispatch();
+
   const { loading, data, error } = useQuery<TGetUserResponceData>(
     getCurrentUserQuery,
     { fetchPolicy: "network-only" }
   );
 
-  if (loading) {
+
+  
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(loading);
+    }
+
+    if (error) {
+      history.push("/login");
+    }
+
+    if (!isEmpty(localStorage.getItem("token"))) {
+      
+        
+    console.log('внутри аппа', data?.currentUser);
+      dispatch(actionSetUser(data?.currentUser));
+      history.push("/profile");
+    }
+    
+    console.log('внутри аппа');
+    return () => {};
+  }, [loading, data, error]);
+
+
+
+  /*if (isLoading) {
     return <Preloader />;
-  }
-
-  if (error) {
-    history.push("/login");
-  }
-
-  if (!isEmpty(localStorage.getItem("token"))) {
-    dispatch(actionAuthorize(true));
-    dispatch(actionSetUser(data?.currentUser));
-    history.push("/main");
-  }
+  }*/
 
   const pages = {
     main: () => <Authorized needPage={"main"} />,

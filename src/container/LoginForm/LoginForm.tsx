@@ -14,7 +14,7 @@ import {
   TSigninData,
   TSigninResponceData
 } from "./LoginForm.types";
-import { actionAuthorize, actionSetUser } from "../../store/index.reducer";
+import { actionSetUser } from "../../store/index.reducer";
 import {
   formLoginValidator,
   onlyEmail,
@@ -49,9 +49,8 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
             "token",
             res.data?.login?.token ? res.data.login.token : ""
           );
-          dispatch(actionAuthorize(true));
           dispatch(actionSetUser(res.data?.login?.user));
-          history.push("/main");
+          history.push("/profile");
           resolve(res);
         })
         .catch(e => {

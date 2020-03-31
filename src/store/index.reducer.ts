@@ -53,9 +53,4 @@ export const setUserReducer = (
   }
 };
 
-const initCurrentUser = {
-  id: 0,
-  firstName: "",
-  secondName: "",
-  email: ""
-};
+const initCurrentUser = {};

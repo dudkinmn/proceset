@@ -13,7 +13,7 @@ import {
 import styles from "./Process.module.css";
 import * as Icon from '../../img/icons'
 
-let Process = ({ process }: TProcessProps): ReactElement => {
+const Process = ({ process }: TProcessProps): ReactElement => {
 
   return (
     <div className={styles.process} >

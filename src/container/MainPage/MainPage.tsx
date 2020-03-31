@@ -32,6 +32,7 @@ const MainPage = ({
       <Process key={process.id} process={process} />
     ));
   };
+  
 
   return (
     <div className={styles.mainPage}>

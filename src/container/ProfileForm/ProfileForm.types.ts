@@ -1,39 +1,27 @@
 import { InjectedFormProps } from "redux-form";
 import { MutateProps } from "@apollo/react-hoc";
-import { TGetUserData } from '../../store/index.reducer'
+import { TGetUserData } from "../../store/index.reducer";
 
-export type TProfileStateProps = {
-};
+export type TProfileStateProps = {};
 
-export type TProfileDispatchProps = {
-};
+export type TProfileDispatchProps = {};
 
-export type TProfileOwnProps = {
-    initialValues : {
-      firstNameField?: string;
-      secondNameField?: string;
-      emailField?: string;
-    }
-};
+export type TProfileOwnProps = {};
 
-export type TProfileFormData = {
-  firstNameField?: string;
-  secondNameField?: string;
-  emailField?: string;
-};
+export type TProfileFormData = {};
 
 export interface IProfileProps
   extends InjectedFormProps<
       TProfileFormData,
       TProfileOwnProps & MutateProps<IProfile, IProfileVariables>
     >,
-  TProfileStateProps,
-  TProfileOwnProps,
-  MutateProps<IProfile, IProfileVariables> {}
-    
-export interface IProfileState { }
+    TProfileStateProps,
+    TProfileOwnProps,
+    MutateProps<IProfile, IProfileVariables> {}
 
- export type TUser = {
+export interface IProfileState {}
+
+export type TUser = {
   id: number;
   firstName: string;
   secondName: string;
@@ -53,23 +41,20 @@ export interface IProfileVariables {
 export type TProfile = {
   email: string;
   password: string;
-}
+};
 
-export type TProfileData = { 
+export type TProfileData = {
   email: string;
   password: string;
 };
 
-
-export type TEditUserResponceData = { 
+export type TEditUserResponceData = {
   data?: {
-    editUser?: TGetUserData
-  } 
+    editUser?: TGetUserData;
+  };
 };
 
-
-
-export type TEditUserData = { 
+export type TEditUserData = {
   id: number;
   firstName: string;
   secondName: string;

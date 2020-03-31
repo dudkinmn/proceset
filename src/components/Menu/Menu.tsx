@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 
 import history from "../../utils/history";
-import { actionAuthorize } from "../../store/index.reducer";
+import { actionAuthorize, actionSetUser } from "../../store/index.reducer";
 import {
   IconMenuLight,
   ProductName,
@@ -22,7 +22,7 @@ let Menu = ({ setMenuVisible }: MenuProps): ReactElement<MenuProps> => {
   const dispatch = useDispatch();
 
   const logOut = () => {
-    dispatch(actionAuthorize(false));
+    dispatch(actionSetUser({}));
     localStorage.clear();
     history.push("/");
   };
