@@ -18,14 +18,14 @@ import { actionSetUser } from "../../store/index.reducer";
 import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 import signupMutation from "../../queries/signupMutation";
 import history from "../../utils/history";
+import { defaultPage } from "../../App"
 import InputField from "../../components/TextField/TextField";
 import Button from "../../components/Button/Button";
 import MyLink from "../../components/MyLink/MyLink";
 import ErrorServer from "../../components/ErrorServer/ErrorServer";
-import styles from "./RegisterForm.module.css";
-
 import { TGetUserResponceData } from "../../layouts/Authorized/Authorized.types";
 import getCurrentUserQuery from "../../queries/getCurrentUserQuery";
+import styles from "./RegisterForm.module.css";
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
@@ -36,14 +36,14 @@ const RegisterForm = ({
   const [signup] = useMutation<{}, TSignupData>(signupMutation);
   const dispatch = useDispatch();
 
-  const [loadGreeting, { called, loading, data }] = useLazyQuery<
+  const [loadCurrentUser, { called, loading, data }] = useLazyQuery<
     TGetUserResponceData
   >(getCurrentUserQuery, { fetchPolicy: "network-only" });
 
-  if (Object.values(data?.currentUser || {}).length > 0) {
-    console.log("data?.currentUser", data?.currentUser);
+  //при получении от сервера данных нового юзера переходим на главную страницу
+  if (Object.values(data?.currentUser || {}).length > 0) { 
     dispatch(actionSetUser(data?.currentUser));
-    history.push("/main");
+    history.push(defaultPage);
   }
 
   const handleSubmit = (fields: any) => {
@@ -62,7 +62,7 @@ const RegisterForm = ({
             "token",
             res.data?.signup ? res.data.signup : ""
           );
-          loadGreeting(); //после регистрации принудительно запрашиваем текущего юзера,
+          loadCurrentUser(); //после регистрации принудительно запрашиваем текущего юзера,
           //потому что бэк его не отдаёт его только при регистрации
           resolve(res);
         })

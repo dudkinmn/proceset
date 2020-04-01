@@ -13,7 +13,7 @@ export const Eye: React.FC<IIcon & {
 }> = props => {
   const onClick = () => {
     if (isFunction(props.onClick)) {
-   props.onClick();
+      props.onClick();
     }
   };
 

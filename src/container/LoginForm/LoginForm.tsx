@@ -22,6 +22,7 @@ import {
 } from "../../utils/validators";
 import signinMutation from "../../queries/signinMutation";
 import history from "../../utils/history";
+import { defaultPage } from "../../App"
 import InputField from "../../components/TextField/TextField";
 import Button from "../../components/Button/Button";
 import MyLink from "../../components/MyLink/MyLink";
@@ -33,9 +34,8 @@ const emailValidator = onlyEmail();
 
 const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
   const [signin] = useMutation<{}, TSigninData>(signinMutation);
-
   const dispatch = useDispatch();
- 
+
   const handleSubmit = (fields: any) => {
     return new Promise((resolve, reject) => {
       signin({
@@ -50,7 +50,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
             res.data?.login?.token ? res.data.login.token : ""
           );
           dispatch(actionSetUser(res.data?.login?.user));
-          history.push("/main");
+          history.push(defaultPage);
           resolve(res);
         })
         .catch(e => {

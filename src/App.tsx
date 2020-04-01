@@ -13,7 +13,9 @@ import { actionSetUser } from "./store/index.reducer";
 import { TGetUserResponceData } from "./App.types";
 import "./index.css";
 
-export interface IAppProps {}
+export interface IAppProps { }
+
+const defaultPage = "/main";
 
 function App({ ...props }: IAppProps): React.ReactElement<any> {
   const currentUser = useSelector((state: TStore) => state.currentUser);
@@ -33,7 +35,7 @@ function App({ ...props }: IAppProps): React.ReactElement<any> {
 
     if (!isEmpty(localStorage.getItem("token")) && !isAuthorized) {
       dispatch(actionSetUser(data?.currentUser));
-      history.push("/main");
+      history.push(defaultPage);
     }
     return () => {};
   }, [loading, data, error]);
@@ -68,3 +70,5 @@ function App({ ...props }: IAppProps): React.ReactElement<any> {
 }
 
 export default App;
+export { defaultPage }
+

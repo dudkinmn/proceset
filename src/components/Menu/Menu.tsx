@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 
 import history from "../../utils/history";
-import { actionAuthorize, actionSetUser } from "../../store/index.reducer";
+import { actionSetUser } from "../../store/index.reducer";
 import {
   IconMenuLight,
   ProductName,

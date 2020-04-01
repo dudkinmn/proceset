@@ -1,31 +1,35 @@
 import React, { ReactElement, useState } from "react";
 import { Field, WrappedFieldProps, BaseFieldProps } from "redux-form";
-import { isString } from 'lodash'
+import { isString } from "lodash";
 
 import { Eye } from "../Eye/Eye";
 import styles from "./TextField.module.css";
 
-
-export interface ITextFieldProps extends Partial<WrappedFieldProps>  {
-    type?: "password" | "input" | "email" | "text" ;
-    placeholder?: string;
-    size?: any;
-    withLabel?: boolean;
-    textLabel?: string;
-    classNames?: string[]
+export interface ITextFieldProps extends Partial<WrappedFieldProps> {
+  type?: "password" | "input" | "email" | "text";
+  placeholder?: string;
+  size?: any;
+  withLabel?: boolean;
+  textLabel?: string;
+  classNames?: string[];
 }
 
 type TextFieldProps = ITextFieldProps;
 
-let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFieldProps): ReactElement => {
-  
-  let [curType, setCurType] = useState(type)
-
+let TextField = ({
+  type,
+  placeholder,
+  withLabel,
+  textLabel,
+  meta,
+  input
+}: TextFieldProps): ReactElement => {
+  let [curType, setCurType] = useState(type);
 
   const handleEyeClick = (): void => {
     const isPasswordType = curType === "password";
-    setCurType(isPasswordType ? "text" : "password" );
-  }
+    setCurType(isPasswordType ? "text" : "password");
+  };
 
   const getEyeIcon = (): React.ReactNode => {
     if (type === "password") {
@@ -39,8 +43,8 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFi
     }
 
     return null;
-  }
-  
+  };
+
   return (
     <div className={styles.inputBlock}>
       {withLabel && <label>{textLabel}</label>}
@@ -48,16 +52,23 @@ let TextField = ({ type, placeholder, withLabel, textLabel, meta, input}: TextFi
         className={withLabel ? styles.inputWithLabel : styles.inputWithoutLabel}
         type={curType}
         placeholder={placeholder}
-        {...input} />
+        {...input}
+      />
       {getEyeIcon()}
-      {(meta?.touched && meta.invalid) &&
-        <span className={withLabel ? styles.errorMessageWithLabel : styles.errorMessageWithoutLabel}>
+      {meta?.touched && meta.invalid && (
+        <span
+          className={
+            withLabel
+              ? styles.errorMessageWithLabel
+              : styles.errorMessageWithoutLabel
+          }
+        >
           {isString(meta?.error) && meta?.error}
-        </span>}
+        </span>
+      )}
     </div>
   );
 };
-
 
 const InputField: React.FC<ITextFieldProps & BaseFieldProps> = props => {
   return <Field name={props.name} component={TextField} {...props} />;

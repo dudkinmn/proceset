@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect } from "react";
 import { reduxForm, SubmissionError } from "redux-form";
 import { withMutation, MutateProps } from "@apollo/react-hoc";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -18,12 +18,9 @@ import { formValidator, onlyEmail, passLength } from "../../utils/validators";
 import editUserMutation from "../../queries/editUserMutation";
 import InputField from "../../components/TextField/TextField";
 import Button from "../../components/Button/Button";
-import styles from "./ProfileForm.module.css";
-
-import { TGetUserResponceData } from "../../layouts/Authorized/Authorized.types";
-import getCurrentUserQuery from "../../queries/getCurrentUserQuery";
 import { actionSetUser } from "../../store/index.reducer";
 import { TStore } from "../../store/index.store";
+import styles from "./ProfileForm.module.css";
 
 const passwordValidator = passLength(8);
 const emailValidator = onlyEmail();
@@ -70,7 +67,6 @@ const ProfileForm = ({
       className={styles.profileForm}
     >
       <div className={styles.background} />
-
       <div className={styles.userHeader}>
         <h1 className={styles.userName}>
           {currentUser.firstName + " " + currentUser.secondName}. Редактирование
