@@ -35,7 +35,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
   const [signin] = useMutation<{}, TSigninData>(signinMutation);
 
   const dispatch = useDispatch();
-
+ 
   const handleSubmit = (fields: any) => {
     return new Promise((resolve, reject) => {
       signin({
@@ -50,7 +50,7 @@ const LoginForm = ({ ...props }: ILoginProps): ReactElement<ILoginState> => {
             res.data?.login?.token ? res.data.login.token : ""
           );
           dispatch(actionSetUser(res.data?.login?.user));
-          history.push("/profile");
+          history.push("/main");
           resolve(res);
         })
         .catch(e => {

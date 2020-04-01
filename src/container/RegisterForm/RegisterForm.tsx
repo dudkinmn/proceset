@@ -43,7 +43,7 @@ const RegisterForm = ({
   if (Object.values(data?.currentUser || {}).length > 0) {
     console.log("data?.currentUser", data?.currentUser);
     dispatch(actionSetUser(data?.currentUser));
-    history.push("/profile");
+    history.push("/main");
   }
 
   const handleSubmit = (fields: any) => {

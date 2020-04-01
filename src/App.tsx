@@ -4,22 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 import { isEmpty } from "lodash";
 
-import "./index.css";
 import { TStore } from "./store/index.store";
 import Authorized from "./layouts/Authorized/Authorized";
 import UnAuthorized from "./layouts/UnAuthorized/UnAuthorized";
-import Preloader from "./components/Preloader/Preloader";
 import getCurrentUserQuery from "./queries/getCurrentUserQuery";
-
 import history from "./utils/history";
 import { actionSetUser } from "./store/index.reducer";
 import { TGetUserResponceData } from "./App.types";
+import "./index.css";
 
 export interface IAppProps {}
 
 function App({ ...props }: IAppProps): React.ReactElement<any> {
   const currentUser = useSelector((state: TStore) => state.currentUser);
-  const [isLoading, setIsLoading] = useState(false);
   let isAuthorized = Object.values(currentUser).length > 0;
 
   const dispatch = useDispatch();
@@ -29,41 +26,24 @@ function App({ ...props }: IAppProps): React.ReactElement<any> {
     { fetchPolicy: "network-only" }
   );
 
-
-  
   useEffect(() => {
-    if (loading) {
-      setIsLoading(loading);
-    }
-
     if (error) {
       history.push("/login");
     }
 
-    if (!isEmpty(localStorage.getItem("token"))) {
-      
-        
-    console.log('внутри аппа', data?.currentUser);
+    if (!isEmpty(localStorage.getItem("token")) && !isAuthorized) {
       dispatch(actionSetUser(data?.currentUser));
-      history.push("/profile");
+      history.push("/main");
     }
-    
-    console.log('внутри аппа');
     return () => {};
   }, [loading, data, error]);
-
-
-
-  /*if (isLoading) {
-    return <Preloader />;
-  }*/
 
   const pages = {
     main: () => <Authorized needPage={"main"} />,
     profile: () => <Authorized needPage={"profile"} />,
     login: () => <UnAuthorized isRegister={false} />,
     register: () => <UnAuthorized isRegister={true} />,
-    notFound: () => <div>404. Страница не найдена</div>
+    notFound: () => <div>404. Страница не найдена</div> //не используется в данной версии
   };
 
   return (
