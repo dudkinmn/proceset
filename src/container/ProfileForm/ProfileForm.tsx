@@ -104,7 +104,7 @@ const ProfileForm = ({
         <InputField
           name="passwordField"
           type="password"
-          placeholder="********"
+          placeholder="Не задано"
           withLabel={true}
           textLabel="Новый пароль"
           validate={[passwordValidator]}
@@ -112,7 +112,7 @@ const ProfileForm = ({
         <InputField
           name="repeatpasswordField"
           type="password"
-          placeholder="********"
+          placeholder="Не задано"
           withLabel={true}
           textLabel="Повторите пароль"
           validate={[passwordValidator]}
